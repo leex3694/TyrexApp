@@ -1,0 +1,156 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+}
+
+.header {
+  padding-bottom: 20px;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.overallTitle{
+  text-align:center;
+}
+
+.currencySelector{
+  text-align:center;
+}
+
+.tableTitle{
+  text-align:center;
+}
+
+
+
+.tableAndSubmitButton{
+  /*margin: 0 auto;*/
+  /*width: 50%;*/
+
+}
+
+table .center {
+}
+
+.submitButton{
+  text-align: center;
+  position: relative;
+  left: 150px;
+}
+
+.changePercentages{
+  position:relative;
+  left:-70px;
+  text-align: center;
+}
+
+
+
+.rowTitle {
+  font-weight: bold;
+
+}
+
+th, td {
+  margin-right: 3px;
+}
+
+.totalPotentials{
+  float: left;
+}
+
+
+
+input[type="text"] {
+  width: 70px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.inputDataTable, th, td {*/
+/*border: 1px solid black;*/
+/*border-collapse: collapse;*/
+/*border-spacing: 2px;*/
+/*}*/
+
+/*.tableAndSubmitButton{*/
+/*}*/
+
+/*.inputDataTable{*/
+
+/*}*/
+
+/*.DataTable{*/
+
+/*}*/
+/*.column1 {*/
+/*width: 10%;*/
+/*float: left;*/
+/*margin-right: 1px;*/
+/*}*/
+
+/*.paceMaker{*/
+/*width: 5%;*/
+/*}*/
+
+/*.crtp {*/
+/*width: 5%;*/
+/*}*/
+
+/*.icd{*/
+/*width: 5%;*/
+/*}*/
+
+/*.crtd{*/
+/*width: 5%;*/
+/*}*/
+
+/*.inputBoxes1{*/
+/*padding-left: 20px;*/
+/*}*/
+
+/*.inputBoxes2{*/
+/*}*/
+
+/*.submitButton{*/
+/*}*/
+
+/*.rowSections{*/
+/*display: inline;*/
+  /*width: 10%;*/
+/*}*/
+
+/*th  {*/
+/*text-align: center;*/
+/*}*/
+
+/*.titlesForColumns{*/
+  /*padding-left: 50px;*/
+/*}*/
+
+/*.tableRow{*/
+/*padding: 7px;*/
+/*}*/
+/*.columnTitles{*/
+
+/*}*/
+
+/*.columnTitle{*/
+  /*float:left;*/
+  /*margin-left:5px;*/
+/*}*/
+
