@@ -6,15 +6,24 @@ var app = angular.module('myApp', []);
 app.controller('FormController', ['$scope', '$http', function($scope, $http){
     $scope.hideAndShowBox = false;
 
-
+    //The submitData is what happens when the submit Button is pressed
     $scope.submitData = function() {
 
-        /* Original top row to be equal to whatever is typed into the input */
+
         $scope.hideAndShowBox = true;
-        $scope.PMNumImplants = $scope.PMNumImplantsInput;
-        $scope.CRTPNumImplants = $scope.CRTPNumImplantsInput;
-        $scope.ICDNumImplants = $scope.ICDNumImplantsInput;
-        $scope.CRTDNumImplants = $scope.CRTDNumImplantsInput;
+
+        var inputPMQuantity = $scope.PMNumImplantsInput;
+        $scope.PMNumImplants = pmQuantity(inputPMQuantity);
+
+        var inputCRTPQuantity = $scope.CRTPNumImplantsInput;
+        $scope.CRTPNumImplants = CRTPQuantity(inputCRTPQuantity);
+
+        var inputICDQuantity = $scope.ICDNumImplantsInput;
+        $scope.ICDNumImplants = ICDQuantity(inputICDQuantity);
+
+        var inputCRTDQuantity = $scope.CRTDNumImplantsInput;
+        $scope.CRTDNumImplants = CRTDQuantity(inputCRTDQuantity);
+
 
 
 
@@ -33,17 +42,30 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
         var inputCRTDCost = $scope.CRTDCostInput;
         $scope.CRTDCost = theCostCRTD(inputCRTDCost);
 
-        var dataSend = {
+        // Cost object to send the value costs which are either input into box or default value
+        var CostObj = {
             PMCost : $scope.PMCost,
             CRTPCost : $scope.CRTPCost,
             ICDCost : $scope.ICDCost,
             CRTDCost :$scope.CRTDCost
         };
 
-        postTotals(dataSend);
+        postTotalPrices(CostObj);
 
+
+        /* Device Quantities object to send the number to the server to do the math
+           The $scope.PMNumImplants has been run through the PMQuantity function to see what value
+           should be passed in.        */
+        var deviceQuantities = {
+            PMQuantity: $scope.PMNumImplants,
+            CRTPQuantity: $scope.CRTPNumImplants,
+            ICDQuantity: $scope.ICDNumImplants,
+            CRTDQuantity: $scope.CRTDNumImplants
+        };
+
+
+       /*********** GET the total cost Avg. by making the get call and math in the serve */
         var x = getResult();
-
         x.then(function(data){
                 costData = data.data;
                 console.log("this is the data " + costData);
@@ -52,13 +74,41 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
         },function(err){
            console.log(err);
         });
-
-
-    };
+        /*********************************************/
 
 
 
-    function postTotals (dataSend){
+        getDeviceQuantities();  //Receiving the device quantities back
+
+
+        postDeviceQuantities(deviceQuantities);  //Calling the Post Quantities and passing in the Obj for quantities
+
+
+        /***************** Function to GET call the Total device quantities ******/
+        function getDeviceQuantities(){
+            return $http({
+                method:'GET',
+                url: "/formRouter/getDeviceQuantities"
+            }).then(function(data) {
+                $scope.totalNumImplants = data.data;
+            },function(err){
+                    console.log(err);
+                })
+        }
+        /**************************************************************************/
+
+    };  //End submit Data function
+
+
+    function postDeviceQuantities (deviceQuantities){
+        $http({
+            method: 'POST',
+            url: '/formRouter/postDeviceQuantities',
+            data: deviceQuantities
+        });
+    }
+
+    function postTotalPrices (dataSend){
         $http({
             method: 'POST',
             url: '/formRouter/postTotalsInServer',
@@ -97,6 +147,8 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
     };
 //*********************************     ***************************************
+
+
 
 
 
@@ -148,6 +200,39 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
 
 
+    /**** These functions are to take input from boxes and if input is null , it'll turn it into a 0 */
+    function pmQuantity(inputPMQuantity){
+        if(inputPMQuantity == null || inputPMQuantity ===''){
+            $scope.PMNumImplants = 0;
+        } else ( $scope.PMNumImplants = $scope.PMNumImplantsInput );
+        return $scope.PMNumImplants;
+    }
+
+    function CRTPQuantity(inputCRTPQuantity){
+        if(inputCRTPQuantity == null || inputCRTPQuantity ===''){
+            $scope.CRTPNumImplants = 0;
+        } else ($scope.CRTPNumImplants = $scope.CRTPNumImplantsInput);
+        return $scope.CRTPNumImplants;
+    }
+
+    function ICDQuantity(inputICDQuantity){
+        if(inputICDQuantity == null || inputICDQuantity === ''){
+            $scope.ICDNumImplants = 0;
+        } else ($scope.ICDNumImplants = $scope.ICDNumImplantsInput);
+        return $scope.ICDNumImplants;
+    }
+
+    function CRTDQuantity(inputCRTDQuantity){
+        if(inputCRTDQuantity == null || inputCRTDQuantity === ''){
+            $scope.CRTDNumImplants = 0;
+        } else ($scope.CRTDNumImplants = $scope.CRTDNumImplantsInput);
+        return $scope.CRTDNumImplants;
+    }
+    /********************************************************/
+
+
+
+
     //Functions to decide what value should appear in the Devices Cost row
     function theCostPM(input) {
         if (input == null || input === '') {
@@ -181,6 +266,9 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
         return $scope.CRTDCost;
     }
     /*  ************************************ END Cost deciding functions *************************/
+
+
+
 
 
 

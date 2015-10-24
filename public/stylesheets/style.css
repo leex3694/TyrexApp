@@ -62,10 +62,14 @@ th, td {
   float: left;
 }
 
+.percentagesHover:hover{
+  color: #0000b7;
+  cursor: pointer;
+}
 
-
-input[type="text"] {
+input[type="number"] {
   width: 70px;
+
 }
 
 
