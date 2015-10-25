@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="/javascripts/angular/angular.min.js"></script>
+    <script src="/javascripts/angular-animate/angular-animate.min.js"></script>
     <script src="javascripts/jquery/dist/jquery.min.js"></script>
     <script src="stylesheets/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="javascripts/app.js"></script>
@@ -74,29 +75,31 @@
 
         </form>
 
-        <ul>
+        <ul ng-show="showFirstTotals" ng-if="bool" class="fade there">
             <li>Total # Implants: {{totalNumImplants}}</li>
-            <li>Total Average Device System Cost: {{totalDevicesCost}}</li>
+            <li>Total Average Device System Cost: €{{totalDevicesCost}}</li>
         </ul>
 
 
-        <div class="totalPotentials">
+        <div class="totalPotentials fade1 there" ng-show="showTotalPotentials" ng-if="bool" >
             <ul>
                 <h3>Total potential # of High Risk Patients</h3>
                 <li>PM: {{PMPotentialHighRisk}}</li>
                 <li>CRTP: {{CRTPPotentialHighRisk}}</li>
                 <li>ICD: {{ICDPotentialHighRisk}}</li>
                 <li>CRTD: {{CRTDPotentialHighRisk}}</li>
+                <li><b>Total: {{TotalPotentialHighRisk}}</b></li>
             </ul>
         </div>
 
-        <div class="totalAvgRisk">
+        <div class="totalAvgRisk fade2 there" ng-show="showAvgRelatedInfection" ng-if="bool">
             <ul>
                 <h3>Device Related Infections</h3>
                 <li>PM: {{PMDeviceInfection}}</li>
                 <li>CRTP: {{CRTPDeviceInfection}}</li>
                 <li>ICD: {{ICDDeviceInfection}}</li>
                 <li>CRTD: {{CRTDDeviceInfection}}</li>
+                <li><b>Total: {{TotalAverageInfectionRate}}</b></li>
             </ul>
         </div>
 

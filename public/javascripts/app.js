@@ -1,16 +1,22 @@
 /**
  * Created by usuario on 10/21/15.
  */
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['ngAnimate']);
 
 app.controller('FormController', ['$scope', '$http', function($scope, $http){
     $scope.hideAndShowBox = false;
+    $scope.showFirstTotals = false;
+    $scope.showTotalPotentials = false;
+    $scope.showAvgRelatedInfection = false;
 
     //The submitData is what happens when the submit Button is pressed
     $scope.submitData = function() {
-
+        $scope.bool =true;
 
         $scope.hideAndShowBox = true;
+        $scope.showFirstTotals = true;
+        $scope.showTotalPotentials = true;
+        $scope.showAvgRelatedInfection = true;
 
         var inputPMQuantity = $scope.PMNumImplantsInput;
         $scope.PMNumImplants = pmQuantity(inputPMQuantity);
@@ -85,17 +91,56 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
 
         /***************** Function to GET call the Total device quantities ******/
+
         function getDeviceQuantities(){
             return $http({
                 method:'GET',
                 url: "/formRouter/getDeviceQuantities"
             }).then(function(data) {
                 $scope.totalNumImplants = data.data;
+                console.log("total num implants " + $scope.totalNumImplants);
+                $scope.TotalPotentialHighRisk = Math.round($scope.totalNumImplants * potentialHighRiskToPercentage);
+                console.log("new variable ____ " +$scope.TotalPotentialHighRisk);
+
             },function(err){
                     console.log(err);
                 })
         }
         /**************************************************************************/
+
+
+        //Math and appending for Total potential # of High Risk Patients
+        var potentialHighRiskToPercentage;
+        function resultTotalPotentialHighRiskPatients (){
+            potentialHighRiskToPercentage = $scope.placeNewPotentialHighRisk/100;
+            $scope.PMPotentialHighRisk  = Math.round((deviceQuantities.PMQuantity) * potentialHighRiskToPercentage);
+            $scope.CRTPPotentialHighRisk = Math.round((deviceQuantities.CRTPQuantity) * potentialHighRiskToPercentage);
+            $scope.ICDPotentialHighRisk =  Math.round((deviceQuantities.ICDQuantity) * potentialHighRiskToPercentage);
+            $scope.CRTDPotentialHighRisk = Math.round((deviceQuantities.CRTDQuantity) * potentialHighRiskToPercentage);
+        }
+        /****************************************************/
+
+        function actualRiskMaker(){
+            var averageInfectionRate = $scope.placeNewAvgInfectionRate/100;
+            $scope.PMDeviceInfection = Math.round($scope.PMPotentialHighRisk * averageInfectionRate);
+            $scope.CRTPDeviceInfection = Math.round($scope.CRTPPotentialHighRisk * averageInfectionRate);
+            $scope.ICDDeviceInfection =  Math.round($scope.ICDPotentialHighRisk * averageInfectionRate);
+            $scope.CRTDDeviceInfection = Math.round($scope.CRTDPotentialHighRisk * averageInfectionRate);
+            $scope.TotalAverageInfectionRate =  $scope.PMDeviceInfection +$scope.CRTPDeviceInfection + $scope.ICDDeviceInfection + $scope.CRTDDeviceInfection;
+        }
+
+
+        resultTotalPotentialHighRiskPatients();
+        actualRiskMaker();
+
+
+
+
+
+
+
+
+
 
     };  //End submit Data function
 
@@ -139,7 +184,6 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
     $scope.showHighRiskInput = false;
     $scope.submitNewPotentialRisk = function(){
         $scope.placeNewPotentialHighRisk = $scope.updatePotentialHighRisk;
-        console.log("this is the new %" + $scope.placeNewPotentialHighRisk);
         $scope.updatePotentialHighRisk = "";
         //console.log(!$scope.hidePercentage);
         $scope.hidePercentage = !$scope.hidePercentage;
