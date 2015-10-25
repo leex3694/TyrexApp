@@ -14,97 +14,154 @@
     <title>Tyrex Cost Compare</title>
 </head>
 <body>
-    <header class="header">
-        <h1 class="overallTitle">Medtronic</h1>
-        <h4 class="currencySelector"><a href="">$</a><a href="">£</a><a href="">€</a></h4>
-    </header>
-    <div ng-controller="FormController">
-        <form>
-            <h3 class="tableTitle">Enter your hospital's data</h3>
-            <div class="tableAndSubmitButton">
-                <table class="table-responsive inputDataTable" align="center">
-                    <tr>
-                        <th class="doNotDecorate"></th>
-                        <th>PM</th>
-                        <th>CRT-P</th>
-                        <th>ICD</th>
-                        <th>CRT-D</th>
-                    </tr>
-                    <tr class="rowSections">
-                        <td class="rowTitle rowSections"># of Implants</td>
-                        <td class="rowSections"> <input ng-hide="hideAndShowBox" ng-model="PMNumImplantsInput" type="number">{{PMNumImplants}}</td>
-                        <td class="rowSections"> <input ng-hide="hideAndShowBox" type="number" ng-model="CRTPNumImplantsInput">{{CRTPNumImplants}}</td>
-                        <td class="rowSections"> <input ng-hide="hideAndShowBox" type="number" ng-model="ICDNumImplantsInput">{{ICDNumImplants}}</td>
-                        <td class="rowSections"> <input ng-hide="hideAndShowBox" type="number" ng-model="CRTDNumImplantsInput">{{CRTDNumImplants}}</td>
-                    </tr>
-                    <tr class="secondRowInputs">
-                        <td class="rowTitle">Device cost</td>
-                        <td> <input type="number" placeholder="€2,150" ng-hide="hideAndShowBox" ng-model="PMCostInput">{{PMCost}}</td>
-                        <td> <input type="number" placeholder="€4,500" ng-hide="hideAndShowBox" ng-model="CRTPCostInput">{{CRTPCost}}</td>
-                        <td> <input type="number" placeholder="€8,000" ng-hide="hideAndShowBox" ng-model="ICDCostInput">{{ICDCost}}</td>
-                        <td> <input type="number" placeholder="€12,400" ng-hide="hideAndShowBox" ng-model="CRTDCostInput">{{CRTDCost}}</td>
-                    </tr>
+    <div class="container">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">1st Results</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">
 
-                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<td class="rowTitle">Potential # of High Risk Patients</td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<td> <input type="text"></td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<td> <input type="text"></td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<td> <input type="text"></td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<td> <input type="text"></td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-                </table>
-                <div class="changePercentages">
+
+                        <header class="header">
+                            <h1 class="overallTitle">Medtronic</h1>
+                            <h4 class="currencySelector"><a href="">$</a><a href="">£</a><a href="">€</a></h4>
+                        </header>
+                        <div ng-controller="FormController">
+                            <form>
+                                <h3 class="tableTitle">Enter your hospital's data</h3>
+                                <div class="tableAndSubmitButton">
+                                    <table class="table-responsive inputDataTable" align="center">
+                                        <tr>
+                                            <th class="doNotDecorate"></th>
+                                            <th>PM</th>
+                                            <th>CRT-P</th>
+                                            <th>ICD</th>
+                                            <th>CRT-D</th>
+                                        </tr>
+                                        <tr class="rowSections">
+                                            <td class="rowTitle rowSections"># of Implants</td>
+                                            <td class="rowSections"> <input ng-hide="hideAndShowBox" ng-model="PMNumImplantsInput" type="number">{{PMNumImplants}}</td>
+                                            <td class="rowSections"> <input ng-hide="hideAndShowBox" type="number" ng-model="CRTPNumImplantsInput">{{CRTPNumImplants}}</td>
+                                            <td class="rowSections"> <input ng-hide="hideAndShowBox" type="number" ng-model="ICDNumImplantsInput">{{ICDNumImplants}}</td>
+                                            <td class="rowSections"> <input ng-hide="hideAndShowBox" type="number" ng-model="CRTDNumImplantsInput">{{CRTDNumImplants}}</td>
+                                        </tr>
+                                        <tr class="secondRowInputs">
+                                            <td class="rowTitle">Device cost</td>
+                                            <td> <input type="number" placeholder="€2,150" ng-hide="hideAndShowBox" ng-model="PMCostInput">{{PMCost}}</td>
+                                            <td> <input type="number" placeholder="€4,500" ng-hide="hideAndShowBox" ng-model="CRTPCostInput">{{CRTPCost}}</td>
+                                            <td> <input type="number" placeholder="€8,000" ng-hide="hideAndShowBox" ng-model="ICDCostInput">{{ICDCost}}</td>
+                                            <td> <input type="number" placeholder="€12,400" ng-hide="hideAndShowBox" ng-model="CRTDCostInput">{{CRTDCost}}</td>
+                                        </tr>
+
+                                        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td class="rowTitle">Potential # of High Risk Patients</td>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td> <input type="text"></td>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td> <input type="text"></td>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td> <input type="text"></td>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<td> <input type="text"></td>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                                    </table>
+                                    <div class="changePercentages">
                     <span  ng-model="potentialHighRisk">
                         <p class="percentagesHover" ng-hide="hidePercentage"  ng-click="changePotentialHighRisk()">Change % of potential high risk: {{placeNewPotentialHighRisk}}%</p>
                        <lable ng-show="showHighRiskInput">Change % of potential high risk </lable> <input type="number" ng-model="updatePotentialHighRisk" ng-show="showHighRiskInput">
                         <input type="submit"  ng-show="showHighRiskInput"  ng-click="submitNewPotentialRisk()">
                     </span>
-                </div>
-                <div class="changePercentages">
+                                    </div>
+                                    <div class="changePercentages">
                     <span  ng-model="averageInfectionRate">
                         <p class="percentagesHover" ng-hide="hideInfectionRate" ng-click="changeAvgInfectionRate()">Change Average Infection Rate: {{placeNewAvgInfectionRate}}%</p>
                        <lable ng-show="showInfectionInput"> Change Average Infection Rate</lable> <input type="number" ng-model="updateAvgInfectionRate" ng-show="showInfectionInput">
                         <input type="submit"  ng-show="showInfectionInput"  ng-click="submitNewAvgInfectionRate()">
                     </span>
+                                    </div>
+
+                                </div>
+                                <div class="submitButton">
+                                    <input type="submit" ng-click="submitData()">
+                                </div>
+
+                            </form>
+
+                            <ul ng-show="showFirstTotals" class="fade there" >
+                                <!--ng-if="bool"-->
+                                <li>Total # Implants: {{totalNumImplants}}</li>
+                                <li>Total Average Device System Cost: €{{totalDevicesCost}}</li>
+                            </ul>
+
+
+                            <div class="totalPotentials fade1 there" ng-show="showTotalPotentials" >
+                                <!--ng-if="bool"-->
+                                <ul>
+                                    <h3>Total potential # of High Risk Patients</h3>
+                                    <li>PM: {{PMPotentialHighRisk}}</li>
+                                    <li>CRTP: {{CRTPPotentialHighRisk}}</li>
+                                    <li>ICD: {{ICDPotentialHighRisk}}</li>
+                                    <li>CRTD: {{CRTDPotentialHighRisk}}</li>
+                                    <li><b>Total: {{TotalPotentialHighRisk}}</b></li>
+                                </ul>
+                            </div>
+
+                            <div class="totalAvgRisk fade2 there" ng-show="showAvgRelatedInfection" >
+                                <!--ng-if="bool"-->
+                                <ul>
+                                    <h3>Device Related Infections</h3>
+                                    <li>PM: {{PMDeviceInfection}}</li>
+                                    <li>CRTP: {{CRTPDeviceInfection}}</li>
+                                    <li>ICD: {{ICDDeviceInfection}}</li>
+                                    <li>CRTD: {{CRTDDeviceInfection}}</li>
+                                    <li><b>Total: {{TotalAverageInfectionRate}}</b></li>
+                                </ul>
+                            </div>
+
+
+
+
+                    </div>
                 </div>
+            </div>
 
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Costs</a>
+                    </h4>
                 </div>
-                <div class="submitButton">
-                    <input type="submit" ng-click="submitData()">
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+
+
+                    fjljflkwlkefmlwkmelkfmlwkmeflkmwlekmflweflkmwef
+                        weflkmwelfkmwef
+
+                        weflkmweflmwef
+                        wefkmwef
+                        ;wefwef
+                        weflwef
+                        wefmwe
+                        f;wefwe
+                        fwlekfn
+                        we;f;wlef
+                        rflk;erg
+                        wergwrg
+                        [ekrgqergq
+                        er
+
+
+
+
+                    </div>
                 </div>
-
-        </form>
-
-        <ul ng-show="showFirstTotals" class="fade there" >
-            <!--ng-if="bool"-->
-            <li>Total # Implants: {{totalNumImplants}}</li>
-            <li>Total Average Device System Cost: €{{totalDevicesCost}}</li>
-        </ul>
+            </div>
 
 
-        <div class="totalPotentials fade1 there" ng-show="showTotalPotentials" >
-            <!--ng-if="bool"-->
-            <ul>
-                <h3>Total potential # of High Risk Patients</h3>
-                <li>PM: {{PMPotentialHighRisk}}</li>
-                <li>CRTP: {{CRTPPotentialHighRisk}}</li>
-                <li>ICD: {{ICDPotentialHighRisk}}</li>
-                <li>CRTD: {{CRTDPotentialHighRisk}}</li>
-                <li><b>Total: {{TotalPotentialHighRisk}}</b></li>
-            </ul>
-        </div>
 
-        <div class="totalAvgRisk fade2 there" ng-show="showAvgRelatedInfection" >
-            <!--ng-if="bool"-->
-            <ul>
-                <h3>Device Related Infections</h3>
-                <li>PM: {{PMDeviceInfection}}</li>
-                <li>CRTP: {{CRTPDeviceInfection}}</li>
-                <li>ICD: {{ICDDeviceInfection}}</li>
-                <li>CRTD: {{CRTDDeviceInfection}}</li>
-                <li><b>Total: {{TotalAverageInfectionRate}}</b></li>
-            </ul>
-        </div>
+
 
 
 

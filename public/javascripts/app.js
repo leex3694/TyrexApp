@@ -3,6 +3,7 @@
  */
 var app = angular.module('myApp', [/*'ngAnimate'*/]);
 
+
 app.controller('FormController', ['$scope', '$http', function($scope, $http){
     $scope.hideAndShowBox = false;
     $scope.showFirstTotals = false;
