@@ -1,7 +1,7 @@
 /**
  * Created by usuario on 10/21/15.
  */
-var app = angular.module('myApp', ['ngAnimate']);
+var app = angular.module('myApp', [/*'ngAnimate'*/]);
 
 app.controller('FormController', ['$scope', '$http', function($scope, $http){
     $scope.hideAndShowBox = false;
@@ -11,7 +11,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
     //The submitData is what happens when the submit Button is pressed
     $scope.submitData = function() {
-        $scope.bool =true;
+       // $scope.bool =true;
 
         $scope.hideAndShowBox = true;
         $scope.showFirstTotals = true;
@@ -103,7 +103,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
                 console.log("new variable ____ " +$scope.TotalPotentialHighRisk);
 
             },function(err){
-                    console.log(err);
+                console.log(err);
                 })
         }
         /**************************************************************************/

@@ -75,13 +75,15 @@
 
         </form>
 
-        <ul ng-show="showFirstTotals" ng-if="bool" class="fade there">
+        <ul ng-show="showFirstTotals" class="fade there" >
+            <!--ng-if="bool"-->
             <li>Total # Implants: {{totalNumImplants}}</li>
             <li>Total Average Device System Cost: €{{totalDevicesCost}}</li>
         </ul>
 
 
-        <div class="totalPotentials fade1 there" ng-show="showTotalPotentials" ng-if="bool" >
+        <div class="totalPotentials fade1 there" ng-show="showTotalPotentials" >
+            <!--ng-if="bool"-->
             <ul>
                 <h3>Total potential # of High Risk Patients</h3>
                 <li>PM: {{PMPotentialHighRisk}}</li>
@@ -92,7 +94,8 @@
             </ul>
         </div>
 
-        <div class="totalAvgRisk fade2 there" ng-show="showAvgRelatedInfection" ng-if="bool">
+        <div class="totalAvgRisk fade2 there" ng-show="showAvgRelatedInfection" >
+            <!--ng-if="bool"-->
             <ul>
                 <h3>Device Related Infections</h3>
                 <li>PM: {{PMDeviceInfection}}</li>
