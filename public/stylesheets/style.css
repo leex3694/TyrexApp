@@ -109,8 +109,22 @@ input[type="number"] {
 
 }
 
+.panel-heading {
+  background: #F5F5F5;
+  box-shadow: 10px 3px 3px 3px #888;
+  height: 40px;
+  position: relative;
+  padding: .5em .5em .5em .7em;
+  display: block;
+}
 
+.panel-group{
+  width: 100%;
+}
 
+.panel-body{
+  border: none;
+}
 
 
 
