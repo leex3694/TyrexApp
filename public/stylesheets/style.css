@@ -126,11 +126,44 @@ input[type="number"] {
   border: none;
 }
 
+.totalInfectionCostWithoutTyrx{
+  border:
+}
+
+.mortalityRisk{
+  padding-left: 20px;
+  font-size: 11px;
+}
+
+.perItemsCost{
+  float: left;
+}
+
+.costPerPatient{
+  float:left;
+}
+
+.potentialCostDist{
+  float:left;
+}
+
+.lineAbove{
+  border-top: 1px solid #000000;
+}
+
+.InfectionCostDistribution, .totalCostWithTyrx, .costDiff{
+  padding-top: 5px;
+}
 
 
+.perCostList, .costPerPatientList, .potentialCostDistList {
+  padding-left: 8px;
+}
 
-
-
+.headingListItem{
+  border: 1px solid #000000;
+  padding: 2px;
+}
 
 
 

@@ -9,141 +9,204 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
     $scope.showFirstTotals = false;
     $scope.showTotalPotentials = false;
     $scope.showAvgRelatedInfection = false;
+    var noTyrxCost;
+
 
     //The submitData is what happens when the submit Button is pressed
     $scope.submitData = function() {
-       // $scope.bool =true;
 
-        $scope.hideAndShowBox = true;
-        $scope.showFirstTotals = true;
-        $scope.showTotalPotentials = true;
-        $scope.showAvgRelatedInfection = true;
+            $scope.hideAndShowBox = true;
+            $scope.showFirstTotals = true;
+            $scope.showTotalPotentials = true;
+            $scope.showAvgRelatedInfection = true;
 
-        var inputPMQuantity = $scope.PMNumImplantsInput;
-        $scope.PMNumImplants = pmQuantity(inputPMQuantity);
+            var inputPMQuantity = $scope.PMNumImplantsInput;
+            $scope.PMNumImplants = pmQuantity(inputPMQuantity);
 
-        var inputCRTPQuantity = $scope.CRTPNumImplantsInput;
-        $scope.CRTPNumImplants = CRTPQuantity(inputCRTPQuantity);
+            var inputCRTPQuantity = $scope.CRTPNumImplantsInput;
+            $scope.CRTPNumImplants = CRTPQuantity(inputCRTPQuantity);
 
-        var inputICDQuantity = $scope.ICDNumImplantsInput;
-        $scope.ICDNumImplants = ICDQuantity(inputICDQuantity);
+            var inputICDQuantity = $scope.ICDNumImplantsInput;
+            $scope.ICDNumImplants = ICDQuantity(inputICDQuantity);
 
-        var inputCRTDQuantity = $scope.CRTDNumImplantsInput;
-        $scope.CRTDNumImplants = CRTDQuantity(inputCRTDQuantity);
-
+            var inputCRTDQuantity = $scope.CRTDNumImplantsInput;
+            $scope.CRTDNumImplants = CRTDQuantity(inputCRTDQuantity);
 
 
 
-        /* Getting the Device cost row to equal whatever is input or default to the default price from the database.
-        *  To change the default values, you must uncomment it in this file and send a new POST to update the values
-           and delete the old ones. They are stored in a mongo database.          */
-        var inputPMCostReceived = $scope.PMCostInput;
-        $scope.PMCost = theCostPM(inputPMCostReceived);
 
-        var inputCRTPCost = $scope.CRTPCostInput;
-        $scope.CRTPCost =theCostCRTP(inputCRTPCost);
+            /* Getting the Device cost row to equal whatever is input or default to the default price from the database.
+             *  To change the default values, you must uncomment it in this file and send a new POST to update the values
+             and delete the old ones. They are stored in a mongo database.          */
+            var inputPMCostReceived = $scope.PMCostInput;
+            $scope.PMCost = theCostPM(inputPMCostReceived);
 
-        var inputICDCost = $scope.ICDCostInput;
-        $scope.ICDCost = theCostICD(inputICDCost);
+            var inputCRTPCost = $scope.CRTPCostInput;
+            $scope.CRTPCost =theCostCRTP(inputCRTPCost);
 
-        var inputCRTDCost = $scope.CRTDCostInput;
-        $scope.CRTDCost = theCostCRTD(inputCRTDCost);
+            var inputICDCost = $scope.ICDCostInput;
+            $scope.ICDCost = theCostICD(inputICDCost);
 
-        // Cost object to send the value costs which are either input into box or default value
-        var CostObj = {
-            PMCost : $scope.PMCost,
-            CRTPCost : $scope.CRTPCost,
-            ICDCost : $scope.ICDCost,
-            CRTDCost :$scope.CRTDCost
-        };
+            var inputCRTDCost = $scope.CRTDCostInput;
+            $scope.CRTDCost = theCostCRTD(inputCRTDCost);
 
-        postTotalPrices(CostObj);
+            // Cost object to send the value costs which are either input into box or default value
+            var CostObj = {
+                PMCost : $scope.PMCost,
+                CRTPCost : $scope.CRTPCost,
+                ICDCost : $scope.ICDCost,
+                CRTDCost :$scope.CRTDCost
+            };
 
-
-        /* Device Quantities object to send the number to the server to do the math
-           The $scope.PMNumImplants has been run through the PMQuantity function to see what value
-           should be passed in.        */
-        var deviceQuantities = {
-            PMQuantity: $scope.PMNumImplants,
-            CRTPQuantity: $scope.CRTPNumImplants,
-            ICDQuantity: $scope.ICDNumImplants,
-            CRTDQuantity: $scope.CRTDNumImplants
-        };
+            postTotalPrices(CostObj);
 
 
-       /*********** GET the total cost Avg. by making the get call and math in the serve */
-        var x = getResult();
-        x.then(function(data){
+            /* Device Quantities object to send the number to the server to do the math
+             The $scope.PMNumImplants has been run through the PMQuantity function to see what value
+             should be passed in.        */
+            var deviceQuantities = {
+                PMQuantity: $scope.PMNumImplants,
+                CRTPQuantity: $scope.CRTPNumImplants,
+                ICDQuantity: $scope.ICDNumImplants,
+                CRTDQuantity: $scope.CRTDNumImplants
+            };
+
+
+            /*********** GET the total cost Avg. by making the get call and math in the serve */
+            var x = getResult();
+            x.then(function(data){
                 costData = data.data;
-                console.log("this is the data " + costData);
                 $scope.totalDevicesCost = costData;
-                //return costData;
-        },function(err){
-           console.log(err);
-        });
-        /*********************************************/
-
-
-
-        getDeviceQuantities();  //Receiving the device quantities back
-
-
-        postDeviceQuantities(deviceQuantities);  //Calling the Post Quantities and passing in the Obj for quantities
-
-
-        /***************** Function to GET call the Total device quantities ******/
-
-        function getDeviceQuantities(){
-            return $http({
-                method:'GET',
-                url: "/formRouter/getDeviceQuantities"
-            }).then(function(data) {
-                $scope.totalNumImplants = data.data;
-                console.log("total num implants " + $scope.totalNumImplants);
-                $scope.TotalPotentialHighRisk = Math.round($scope.totalNumImplants * potentialHighRiskToPercentage);
-                console.log("new variable ____ " +$scope.TotalPotentialHighRisk);
-
             },function(err){
                 console.log(err);
+            });
+            /*********************************************/
+
+
+
+            getDeviceQuantities();  //Receiving the device quantities back
+
+
+            postDeviceQuantities(deviceQuantities);  //Calling the Post Quantities and passing in the Obj for quantities
+
+
+            /***************** Function to GET call the Total device quantities ******/
+                                //function getDeviceQuantities(){
+                                //    return $http({
+                                //        method:'GET',
+                                //        url: "/formRouter/getDeviceQuantities"
+                                //    }).then(function(data) {
+                                //        $scope.totalNumImplants = data.data;
+                                //        console.log("total num implants " + $scope.totalNumImplants);
+                                //        $scope.TotalPotentialHighRisk = Math.round($scope.totalNumImplants * potentialHighRiskToPercentage);
+                                //        highRisk ={TotalHighRiskPercentage: $scope.TotalPotentialHighRisk}
+                                //    },function(err){
+                                //        console.log(err);
+                                //        })
+                                //}
+
+            function getDeviceQuantities(){
+                return $http({
+                    method:'GET',
+                    url: "/formRouter/getDeviceQuantities"
+                });
+            }
+
+
+
+            function setTotalPotentialRisk(){
+                getDeviceQuantities().then(function(data) {
+                    settingTotalCosts (data);
+                    //returnPotentialCostDist(data);
+                    returnPotentialCostDist();
+
+                },function(err){
+                    console.log(err);
                 })
-        }
-        /**************************************************************************/
+            }
+            /**************************************************************************/
 
 
-        //Math and appending for Total potential # of High Risk Patients
-        var potentialHighRiskToPercentage;
-        function resultTotalPotentialHighRiskPatients (){
-            potentialHighRiskToPercentage = $scope.placeNewPotentialHighRisk/100;
-            $scope.PMPotentialHighRisk  = Math.round((deviceQuantities.PMQuantity) * potentialHighRiskToPercentage);
-            $scope.CRTPPotentialHighRisk = Math.round((deviceQuantities.CRTPQuantity) * potentialHighRiskToPercentage);
-            $scope.ICDPotentialHighRisk =  Math.round((deviceQuantities.ICDQuantity) * potentialHighRiskToPercentage);
-            $scope.CRTDPotentialHighRisk = Math.round((deviceQuantities.CRTDQuantity) * potentialHighRiskToPercentage);
-        }
-        /****************************************************/
+            setTotalPotentialRisk();
 
-        function actualRiskMaker(){
-            var averageInfectionRate = $scope.placeNewAvgInfectionRate/100;
-            $scope.PMDeviceInfection = Math.round($scope.PMPotentialHighRisk * averageInfectionRate);
-            $scope.CRTPDeviceInfection = Math.round($scope.CRTPPotentialHighRisk * averageInfectionRate);
-            $scope.ICDDeviceInfection =  Math.round($scope.ICDPotentialHighRisk * averageInfectionRate);
-            $scope.CRTDDeviceInfection = Math.round($scope.CRTDPotentialHighRisk * averageInfectionRate);
-            $scope.TotalAverageInfectionRate =  $scope.PMDeviceInfection +$scope.CRTPDeviceInfection + $scope.ICDDeviceInfection + $scope.CRTDDeviceInfection;
-        }
+            function settingTotalCosts (data){
+                $scope.totalNumImplants = data.data;
+
+                $scope.TotalPotentialHighRisk = Math.round($scope.totalNumImplants * potentialHighRiskToPercentage);
+
+                noTyrxCost = Math.round($scope.TotalAverageInfectionRate * costOfInfectionEuros);
+                $scope.TotalCostInfectionWithoutTyrx = numberWithCommas(noTyrxCost);
+
+                var infectionwithTyrexCost = Math.round(CIEDInfectionRisk * $scope.TotalPotentialHighRisk * costOfInfectionEuros);
+                $scope.costInfectionWithTyrx = numberWithCommas(infectionwithTyrexCost);
+                console.log("infection cost " + infectionwithTyrexCost);
 
 
-        resultTotalPotentialHighRiskPatients();
-        actualRiskMaker();
+                var TYRXCostInHighRiskPatients = TYRXPrice * $scope.TotalPotentialHighRisk;
+                $scope.costOfTYRXInHighRiskPatients = numberWithCommas(TYRXCostInHighRiskPatients);
+
+                var totalCostTyrxAndInfection = infectionwithTyrexCost + TYRXCostInHighRiskPatients;
+                $scope.totalCostInfectionAndTyrex = numberWithCommas(totalCostTyrxAndInfection);
+                console.log("total Cost infection and tyrc " + totalCostTyrxAndInfection);
 
 
-
-
-
-
-
+                var economicDifference = totalCostTyrxAndInfection - noTyrxCost;
+                $scope.economicImpact = numberWithCommas(economicDifference);
+                console.log("economic Diff total " + economicDifference);
+                returnPotentialCostDist(data);
+            }
 
 
 
-    };  //End submit Data function
+
+
+            //Math and appending for Total potential # of High Risk Patients
+            var potentialHighRiskToPercentage;
+            function resultTotalPotentialHighRiskPatients (){
+                potentialHighRiskToPercentage = $scope.placeNewPotentialHighRisk/100;
+                $scope.PMPotentialHighRisk  = Math.round((deviceQuantities.PMQuantity) * potentialHighRiskToPercentage);
+                $scope.CRTPPotentialHighRisk = Math.round((deviceQuantities.CRTPQuantity) * potentialHighRiskToPercentage);
+                $scope.ICDPotentialHighRisk =  Math.round((deviceQuantities.ICDQuantity) * potentialHighRiskToPercentage);
+                $scope.CRTDPotentialHighRisk = Math.round((deviceQuantities.CRTDQuantity) * potentialHighRiskToPercentage);
+            }
+            /****************************************************/
+
+
+            function actualRiskMaker(){
+                var averageInfectionRate = $scope.placeNewAvgInfectionRate/100;
+                $scope.PMDeviceInfection = Math.round($scope.PMPotentialHighRisk * averageInfectionRate);
+                $scope.CRTPDeviceInfection = Math.round($scope.CRTPPotentialHighRisk * averageInfectionRate);
+                $scope.ICDDeviceInfection =  Math.round($scope.ICDPotentialHighRisk * averageInfectionRate);
+                $scope.CRTDDeviceInfection = Math.round($scope.CRTDPotentialHighRisk * averageInfectionRate);
+                $scope.TotalAverageInfectionRate =  $scope.PMDeviceInfection +$scope.CRTPDeviceInfection + $scope.ICDDeviceInfection + $scope.CRTDDeviceInfection;
+                $scope.PatientMortality =  Math.ceil($scope.TotalAverageInfectionRate / 2);
+            }
+
+
+
+            resultTotalPotentialHighRiskPatients();
+            actualRiskMaker();
+
+
+
+
+            //var costOfInfectionDollars =  47817.57;
+            var costOfInfectionEuros =  42076.27;
+            //var costOfInfectionPounds = 30,958.40;
+
+            var CIEDInfectionRisk = .0044;
+            var TYRXPrice = 1292;
+
+
+
+
+
+
+
+
+
+
+    }; //End submit Data function
 
 
     function postDeviceQuantities (deviceQuantities){
@@ -168,6 +231,71 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
             url: "/formRouter/getresult"
         });
     }
+
+    function numberWithCommas(x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    }
+
+
+
+
+/*  ******** This is for the Cost Accordia, Infection Cost Distribution ***************/
+    var patientBedCost = 17761.40;
+    $scope.patientBedCost = numberWithCommas(patientBedCost);
+
+    var deviceExtractionCost = 3450.32;
+    $scope.deviceExtractionCost = numberWithCommas(deviceExtractionCost);
+
+    var deviceReplacementCost = 60187.24;
+    $scope.deviceReplacementCost = numberWithCommas(deviceReplacementCost);
+
+    var antibioticsCost =  829.29;
+    $scope.antibioticsCost = numberWithCommas(antibioticsCost);
+
+    var totalSumOfExampleCosts = (patientBedCost + deviceExtractionCost + deviceReplacementCost + antibioticsCost).toFixed(2);
+    $scope.totalCostsExample = numberWithCommas(totalSumOfExampleCosts);
+
+    $scope.weightedBedOccupancy = Math.round((patientBedCost/totalSumOfExampleCosts) * 100);
+    //console.log( $scope.weightedBedOccupancy);
+
+
+    var weightedAvgBed = patientBedCost / totalSumOfExampleCosts;
+
+    var weightedAvgDeviceExtraction = deviceExtractionCost / totalSumOfExampleCosts;
+
+    var weightedAvgDeviceReplacementCost = deviceReplacementCost/totalSumOfExampleCosts;
+
+    var weightedAvgAntibiotics = antibioticsCost / totalSumOfExampleCosts;
+
+
+    function returnPotentialCostDist(){
+        var potentialCostDistBed = Math.round(noTyrxCost * weightedAvgBed);
+        $scope.PotentialDistBed = numberWithCommas(potentialCostDistBed);
+
+        var potentialCostDistDeviceExtraction = Math.round(noTyrxCost * weightedAvgDeviceExtraction);
+        $scope.potentialDistDeviceExtraction = numberWithCommas(potentialCostDistDeviceExtraction);
+
+        var potentialCostDistDeviceReplacement = Math.round(noTyrxCost * weightedAvgDeviceReplacementCost);
+        $scope.potentialDistDeviceReplacement= numberWithCommas(potentialCostDistDeviceReplacement);
+
+        var potentialCostDistAntibiotics = Math.round(noTyrxCost * weightedAvgAntibiotics);
+        $scope.potentialCostDistAntibiotics = numberWithCommas(potentialCostDistAntibiotics);
+
+        var totalPotentialCostDist = Math.round(noTyrxCost * 1);
+        $scope.totalPotentialCostDist = numberWithCommas(totalPotentialCostDist);
+    }
+
+
+
+
+    //********************************************************************************
+
+
+
+
+
 
 
 
@@ -313,11 +441,6 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
     /*  ************************************ END Cost deciding functions *************************/
 
 
-
-
-
-
-
     /*This is commented out because I only needed it to post the values once, to have it in database
      and I tried to transfer it into the Server but couldn't get it to work so I posted the values once
      and just commented it out. I kept it here in case the default prices ever change
@@ -335,6 +458,20 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
     /*  ************************** END POST ********************************/
 
 
+
+
+    /******************************************************************************************************************
+    ******************************************************************************************************************
+     **************************** START PAGE TWO *********************************************************************
+     */
+
+
+
+
+
+
+
+
 }]);
 
 
@@ -344,4 +481,18 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 // Can't get the potential High Risk percentage input to disappear after submitting
 // I have to do 3 currencies, what's the easiest way to do that?
 // can i make 1 function to take in all types of COSts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
