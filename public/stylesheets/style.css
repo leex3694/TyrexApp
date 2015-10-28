@@ -1,34 +1,148 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-
 }
 
 .header {
-  padding-bottom: 20px;
+  background-color: rgba(0, 80, 183, 0.77);
+  width: 100%;
+  z-index: 1;
+  height: 125px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow:  5px 5px 11px #000e2b;
 }
 
 a {
   color: #00B7FF;
 }
 
+.behindTitleDiv{
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(14, 14, 14, 0.58);
+  padding-bottom: 13px;
+  position: relative;
+  top: 18px;
+  border-radius: 7px;
+  box-shadow: 3px 2px 5px;
+}
+
 .overallTitle{
-  text-align:center;
+  text-align: center;
+  position: relative;
+  top: 21px;
+  color: white;
 }
 
 .currencySelector{
   text-align:center;
+  position: relative;
+  top: 14px;
 }
 
 .tableTitle{
   text-align:center;
+
 }
 
 
 
+
+
 .tableAndSubmitButton{
-  /*margin: 0 auto;*/
-  /*width: 50%;*/
+}
+
+.inputDataTable{
+
+}
+
+.DataTable{
+
+}
+.column1 {
+  width: 15%;
+  float: left;
+  margin-right: 35px;
+}
+
+.paceMaker{
+  width: 15%;
+}
+
+.crtp {
+  width: 15%;
+}
+
+.icd{
+  width: 15%;
+}
+
+.crtd{
+  width: 15%;
+}
+
+.inputBoxes1{
+}
+
+.inputBoxes2{
+}
+
+.submitButton{
+}
+
+.rowSections{
+  display: inline;
+
+}
+
+.row1{
+  display: block;
+  clear: both;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/*th  {*/
+  /*text-align: center;*/
+/*}*/
+
+.titlesForColumns{
+  /*padding-left: 50px;*/
+}
+
+.tableRow{
+  padding: 7px;
+}
+.columnTitles{
+
+}
+
+.columnTitle{
+  float:left;
+  margin-left:3px;
+}
+
+
+.spanWidth{
+  width:15%;
+  display:block;
+  float:left;
+
+}
+
+
+
+
+
+
+.tableAndSubmitButton{
+  margin: 0 auto;
+  width: 50%;
 
 }
 
@@ -42,45 +156,49 @@ table .center {
 }
 
 .changePercentages{
-  position:relative;
-  left:-70px;
+  padding-top:4px;
   text-align: center;
 }
 
-.fade.ng-enter {
-  transition:1s linear all;
-  opacity:0;
+/*.fade.ng-enter {*/
+  /*transition:1s linear all;*/
+  /*opacity:0;*/
+/*}*/
+
+/*/!* The finishing CSS styles for the enter animation *!/*/
+/*.fade.ng-enter.ng-enter-active {*/
+  /*opacity:1;*/
+/*}*/
+
+
+.percentageChangeInput{
+
 }
 
-/* The finishing CSS styles for the enter animation */
-.fade.ng-enter.ng-enter-active {
-  opacity:1;
-}
+/*.there{*/
+  /*opacity:1;*/
+  /*text-align: center;*/
+/*}*/
 
-.there{
-  opacity:1;
-  text-align: center;
-}
+/*.fade1.ng-enter {*/
+  /*transition:2.5s linear all;*/
+  /*opacity:0;*/
+/*}*/
 
-.fade1.ng-enter {
-  transition:2.5s linear all;
-  opacity:0;
-}
+/*/!* The finishing CSS styles for the enter animation *!/*/
+/*.fade1.ng-enter.ng-enter-active {*/
+  /*opacity:1;*/
+/*}*/
 
-/* The finishing CSS styles for the enter animation */
-.fade1.ng-enter.ng-enter-active {
-  opacity:1;
-}
+/*.fade2.ng-enter {*/
+  /*transition:4s linear all;*/
+  /*opacity:0;*/
+/*}*/
 
-.fade2.ng-enter {
-  transition:4s linear all;
-  opacity:0;
-}
-
-/* The finishing CSS styles for the enter animation */
-.fade2.ng-enter.ng-enter-active {
-  opacity:1;
-}
+/*/!* The finishing CSS styles for the enter animation *!/*/
+/*.fade2.ng-enter.ng-enter-active {*/
+  /*opacity:1;*/
+/*}*/
 
 li {
   list-style: none;
@@ -91,12 +209,26 @@ li {
 
 }
 
-th, td {
-  margin-right: 3px;
-}
+/*th, td {*/
+  /*margin-right: 3px;*/
+/*}*/
 
 .totalPotentials{
 
+}
+
+.percentagesContainer{
+  margin-top: 10px;
+}
+
+.percentagesHover{
+  position: relative;
+  left: -65px;
+}
+
+.submitPercentages{
+  position: relative;
+  left: -50px;
 }
 
 .percentagesHover:hover{
@@ -104,9 +236,16 @@ th, td {
   cursor: pointer;
 }
 
-input[type="number"] {
-  width: 72px;
 
+
+input.regularInputsNotPercents[type="number"] {
+  /*width: 72px;*/
+  width: 15%;
+
+}
+
+.percentageChangeInput{
+  width:45px;
 }
 
 .panel-heading {
@@ -118,8 +257,13 @@ input[type="number"] {
   display: block;
 }
 
+.panel-group .panel {
+  background-color: rgb(244, 244, 249);
+}
+
+
 .panel-group{
-  width: 100%;
+  box-shadow: -8px 5px 15px rgba(39, 57, 96, 0.35);
 }
 
 .panel-body{
@@ -127,7 +271,7 @@ input[type="number"] {
 }
 
 .totalInfectionCostWithoutTyrx{
-  border:
+
 }
 
 .mortalityRisk{
@@ -166,79 +310,29 @@ input[type="number"] {
 }
 
 
+@media screen and (max-width: 480px) {
+  .percentagesHover {
+    position: relative;
+    left: -37px;
+  }
+
+}
+
+@media screen and (max-width: 760px) {
+
+  .tableAndSubmitButton{
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 980px) {
+
+}
 
 
 
-/*.inputDataTable, th, td {*/
-/*border: 1px solid black;*/
-/*border-collapse: collapse;*/
-/*border-spacing: 2px;*/
-/*}*/
 
-/*.tableAndSubmitButton{*/
-/*}*/
 
-/*.inputDataTable{*/
 
-/*}*/
-
-/*.DataTable{*/
-
-/*}*/
-/*.column1 {*/
-/*width: 10%;*/
-/*float: left;*/
-/*margin-right: 1px;*/
-/*}*/
-
-/*.paceMaker{*/
-/*width: 5%;*/
-/*}*/
-
-/*.crtp {*/
-/*width: 5%;*/
-/*}*/
-
-/*.icd{*/
-/*width: 5%;*/
-/*}*/
-
-/*.crtd{*/
-/*width: 5%;*/
-/*}*/
-
-/*.inputBoxes1{*/
-/*padding-left: 20px;*/
-/*}*/
-
-/*.inputBoxes2{*/
-/*}*/
-
-/*.submitButton{*/
-/*}*/
-
-/*.rowSections{*/
-/*display: inline;*/
-  /*width: 10%;*/
-/*}*/
-
-/*th  {*/
-/*text-align: center;*/
-/*}*/
-
-/*.titlesForColumns{*/
-  /*padding-left: 50px;*/
-/*}*/
-
-/*.tableRow{*/
-/*padding: 7px;*/
-/*}*/
-/*.columnTitles{*/
-
-/*}*/
-
-/*.columnTitle{*/
-  /*float:left;*/
-  /*margin-left:5px;*/
-/*}*/
 

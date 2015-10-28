@@ -18,6 +18,13 @@
 
    <!--******************* Accordian begins here ********************-->
    <div ng-controller="FormController">
+
+       <header class="header">
+           <div class="behindTitleDiv">
+               <h1 class="overallTitle">Medtronic</h1>
+               <h4 class="currencySelector"><a href="">$</a><a href="">£</a><a href="">€</a></h4>
+           </div>
+       </header>
         <div class="container">
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
@@ -30,63 +37,73 @@
                         <div class="panel-body">
             <!--**************** Text begins in accordian *****************-->
 
-                            <header class="header">
-                                <h1 class="overallTitle">Medtronic</h1>
-                                <h4 class="currencySelector"><a href="">$</a><a href="">£</a><a href="">€</a></h4>
-                            </header>
+
                                 <form>
                                     <h3 class="tableTitle">Enter your hospital's data</h3>
                                     <div class="tableAndSubmitButton">
-                                        <table class="table-responsive inputDataTable" align="center">
-                                            <tr>
-                                                <th class="doNotDecorate"></th>
-                                                <th>PM</th>
-                                                <th>CRT-P</th>
-                                                <th>ICD</th>
-                                                <th>CRT-D</th>
-                                            </tr>
-                                            <tr class="rowSections">
-                                                <td class="rowTitle rowSections"># of Implants</td>
-                                                <td class="rowSections"> <input ng-hide="hideAndShowBox" ng-model="PMNumImplantsInput" type="number">{{PMNumImplants}}</td>
-                                                <td class="rowSections"> <input ng-hide="hideAndShowBox" type="number" ng-model="CRTPNumImplantsInput">{{CRTPNumImplants}}</td>
-                                                <td class="rowSections"> <input ng-hide="hideAndShowBox" type="number" ng-model="ICDNumImplantsInput">{{ICDNumImplants}}</td>
-                                                <td class="rowSections"> <input ng-hide="hideAndShowBox" type="number" ng-model="CRTDNumImplantsInput">{{CRTDNumImplants}}</td>
-                                            </tr>
-                                            <tr class="secondRowInputs">
-                                                <td class="rowTitle">Device cost</td>
-                                                <td> <input type="number" placeholder="€2,150" ng-hide="hideAndShowBox" ng-model="PMCostInput">{{PMCost}}</td>
-                                                <td> <input type="number" placeholder="€4,500" ng-hide="hideAndShowBox" ng-model="CRTPCostInput">{{CRTPCost}}</td>
-                                                <td> <input type="number" placeholder="€8,000" ng-hide="hideAndShowBox" ng-model="ICDCostInput">{{ICDCost}}</td>
-                                                <td> <input type="number" placeholder="€12,400" ng-hide="hideAndShowBox" ng-model="CRTDCostInput">{{CRTDCost}}</td>
-                                            </tr>
 
-                                            <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-                                            <!--&lt;!&ndash;<td class="rowTitle">Potential # of High Risk Patients</td>&ndash;&gt;-->
-                                            <!--&lt;!&ndash;<td> <input type="text"></td>&ndash;&gt;-->
-                                            <!--&lt;!&ndash;<td> <input type="text"></td>&ndash;&gt;-->
-                                            <!--&lt;!&ndash;<td> <input type="text"></td>&ndash;&gt;-->
-                                            <!--&lt;!&ndash;<td> <input type="text"></td>&ndash;&gt;-->
-                                            <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-                                        </table>
-                                        <div class="changePercentages">
-                        <span  ng-model="potentialHighRisk">
-                            <p class="percentagesHover" ng-hide="hidePercentage"  ng-click="changePotentialHighRisk()">Change % of potential high risk: {{placeNewPotentialHighRisk}}%</p>
-                           <lable ng-show="showHighRiskInput">Change % of potential high risk </lable> <input type="number" ng-model="updatePotentialHighRisk" ng-show="showHighRiskInput">
-                            <input type="submit"  ng-show="showHighRiskInput"  ng-click="submitNewPotentialRisk()">
-                        </span>
-                                        </div>
-                                        <div class="changePercentages">
-                        <span  ng-model="averageInfectionRate">
-                            <p class="percentagesHover" ng-hide="hideInfectionRate" ng-click="changeAvgInfectionRate()">Change Average Infection Rate: {{placeNewAvgInfectionRate}}%</p>
-                           <lable ng-show="showInfectionInput"> Change Average Infection Rate</lable> <input type="number" ng-model="updateAvgInfectionRate" ng-show="showInfectionInput">
-                            <input type="submit"  ng-show="showInfectionInput"  ng-click="submitNewAvgInfectionRate()">
-                        </span>
+
+                                        <div class="titlesForColumns">
+                                            <div class="columnTitle rowSections column1">&nbsp;</div>
+                                            <div class="columnTitle rowSections paceMaker">PM</div>
+                                            <div class="columnTitle rowSections crtp">CRT-P</div>
+                                            <div class="columnTitle rowSections icd">ICD</div>
+                                            <div class="columnTitle rowSections crtd">CRT-D</div>
                                         </div>
 
+
+                                        <div class="tableAllOne">
+                                            <div class="tableRow clearfix">
+                                                <div class="row1 ">
+                                                    <div class="rowTitle rowSections column1"># of Implants</div>
+                                                    <div class="inputBoxes1">
+                                                        <div class="rowSections paceMaker"> <input ng-hide="hideAndShowBox" ng-model="PMNumImplantsInput" type="number" class="regularInputsNotPercents"><span class="spanWidth" ng-click="editInputs()" ng-hide="inputBoxHide">{{PMNumImplants}}</span></div>
+                                                        <div class="rowSections crtp"> <input ng-hide="hideAndShowBox" type="number" ng-model="CRTPNumImplantsInput" class="regularInputsNotPercents"><span class="spanWidth" ng-click="editInputs()" ng-hide="inputBoxHide">{{CRTPNumImplants}}</span></div>
+                                                        <div class="rowSections icd"> <input ng-hide="hideAndShowBox" type="number" ng-model="ICDNumImplantsInput" class="regularInputsNotPercents"><span class="spanWidth" ng-click="editInputs()" ng-hide="inputBoxHide">{{ICDNumImplants}}</span></div>
+                                                        <div class="rowSections crtd"> <input ng-hide="hideAndShowBox" type="number" ng-model="CRTDNumImplantsInput" class="regularInputsNotPercents"><span class="spanWidth" ng-click="editInputs()" ng-hide="inputBoxHide">{{CRTDNumImplants}}</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tableRow clearfix">
+                                            <div class="rowTitle column1">Device cost</div>
+                                            <div class="inputBoxes2">
+                                                <div class="rowSections paceMaker"> <input type="number" placeholder="€2,150" ng-hide="hideAndShowBox" ng-model="PMCostInput" class="regularInputsNotPercents"><span class="spanWidth" ng-click="editInputs()" ng-hide="inputBoxHide">{{PMCost}}</span></div>
+                                                <div class="rowSections crtp"> <input type="number" placeholder="€4,500" ng-hide="hideAndShowBox" ng-model="CRTPCostInput" class="regularInputsNotPercents"><span class="spanWidth" ng-click="editInputs()" ng-hide="inputBoxHide">{{CRTPCost}}</span></div>
+                                                <div class="rowSections icd"> <input type="number" placeholder="€8,000" ng-hide="hideAndShowBox" ng-model="ICDCostInput" class="regularInputsNotPercents"><span class="spanWidth" ng-click="editInputs()" ng-hide="inputBoxHide">{{ICDCost}}</span></div>
+                                                <div class="rowSections crtd"> <input type="number" placeholder="€12,400" ng-hide="hideAndShowBox" ng-model="CRTDCostInput" class="regularInputsNotPercents"><span class="spanWidth" ng-click="editInputs()" ng-hide="inputBoxHide">{{CRTDCost}}</span></div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="percentagesContainer">
+                                            <div class="changePercentages">
+                                                <span  ng-model="potentialHighRisk">
+                                                    <span class="percentagesHover" ng-hide="hidePercentage"  ng-click="changePotentialHighRisk()">Change % of potential high risk:
+                                                    <input class="percentageChangeInput" ng-model="updatePotentialHighRisk" placeholder="30" type="number"> <span ng-hide="hidePercentageValues"> {{placeNewPotentialHighRisk}}</span>%</span>
+                                                   <lable ng-show="showHighRiskInput">Change % of potential high risk </lable>
+                                                    <input type="number" class="percentageChangeInput" ng-model="updatePotentialHighRisk" ng-show="showHighRiskInput">
+                                                    <input type="submit" class="submitPercentages" ng-show="showHighRiskInputButton"  ng-click="submitNewPotentialRisk()">
+                                                </span>
+                                            </div>
+                                            <div class="changePercentages">
+                                                <span ng-model="averageInfectionRate">
+                                                    <span class="percentagesHover" ng-hide="hideInfectionRate" ng-click="changeAvgInfectionRate()">Change Average Infection Rate:
+                                                        <input class="percentageChangeInput" ng-model="updateAvgInfectionRate" placeholder="3.6" type="number">
+                                                        <span ng-hide="hidePercentageValues">{{placeNewAvgInfectionRate}}</span>%</span>
+                                                   <lable ng-show="showInfectionInput"> Change Average Infection Rate</lable>
+                                                    <input type="number" ng-model="updateAvgInfectionRate" ng-show="showInfectionInput" class="percentageChangeInput">
+                                                    <input type="submit" class="submitPercentages" ng-show="showInfectionInputButton"  ng-click="submitNewAvgInfectionRate()" >
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="submitButton">
+                                            <input type="submit" ng-click="submitData()">
+                                        </div>
                                     </div>
-                                    <div class="submitButton">
-                                        <input type="submit" ng-click="submitData()">
-                                    </div>
+
 
                                 </form>
 
@@ -265,8 +282,8 @@
                         <!--</div>-->
 
 
-             </div>
-        </div>
+                         <!--</div>-->
+                    <!--</div>-->
 
 
     </div> <!-- Closing out the Angular Controller for the first part -->
@@ -275,7 +292,6 @@
 
 
 
-
-
+</div>
 </body>
 </html>

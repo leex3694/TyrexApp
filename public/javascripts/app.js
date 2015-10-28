@@ -9,8 +9,11 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
     $scope.showFirstTotals = false;
     $scope.showTotalPotentials = false;
     $scope.showAvgRelatedInfection = false;
+    $scope.inputBoxHide = true;
+    $scope.hidePercentageValues=true;
     var noTyrxCost;
-
+    $scope.placeNewPotentialHighRisk = 30;
+    $scope.placeNewAvgInfectionRate = 3.6;
 
     //The submitData is what happens when the submit Button is pressed
     $scope.submitData = function() {
@@ -19,6 +22,11 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
             $scope.showFirstTotals = true;
             $scope.showTotalPotentials = true;
             $scope.showAvgRelatedInfection = true;
+            $scope.inputBoxHide = false;
+        $scope.editInputs = function(){
+            $scope.hideAndShowBox = false;
+            $scope.inputBoxHide = true;
+        };
 
             var inputPMQuantity = $scope.PMNumImplantsInput;
             $scope.PMNumImplants = pmQuantity(inputPMQuantity);
@@ -139,7 +147,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
                 var infectionwithTyrexCost = Math.round(CIEDInfectionRisk * $scope.TotalPotentialHighRisk * costOfInfectionEuros);
                 $scope.costInfectionWithTyrx = numberWithCommas(infectionwithTyrexCost);
-                console.log("infection cost " + infectionwithTyrexCost);
+
 
 
                 var TYRXCostInHighRiskPatients = TYRXPrice * $scope.TotalPotentialHighRisk;
@@ -147,12 +155,12 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
                 var totalCostTyrxAndInfection = infectionwithTyrexCost + TYRXCostInHighRiskPatients;
                 $scope.totalCostInfectionAndTyrex = numberWithCommas(totalCostTyrxAndInfection);
-                console.log("total Cost infection and tyrc " + totalCostTyrxAndInfection);
+
 
 
                 var economicDifference = totalCostTyrxAndInfection - noTyrxCost;
                 $scope.economicImpact = numberWithCommas(economicDifference);
-                console.log("economic Diff total " + economicDifference);
+
                 returnPotentialCostDist(data);
             }
 
@@ -289,36 +297,58 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
 
 
-
+    $scope.showInfectionInput= false;
     //********************************************************************************
-
-
-
-
-
-
-
-
-    $scope.valueOfPotentialHighRisk = 30; //Setting initial value of Potential High Risk Patients to 30%. it can be change by clicking on it.
-    $scope.placeNewPotentialHighRisk = $scope.valueOfPotentialHighRisk;
+    //$scope.valueOfPotentialHighRisk = 30; //Setting initial value of Potential High Risk Patients to 30%. it can be change by clicking on it.
+    //$scope.placeNewPotentialHighRisk = $scope.valueOfPotentialHighRisk;
     $scope.changePotentialHighRisk = function(){
-        //$scope.hidePercentage = true;
-        //$scope.showHighRiskInput =true;
-        $scope.hidePercentage =!$scope.hidePercentage;
-        $scope.showHighRiskInput = !$scope.showHighRiskInput;
+        $scope.showHighRiskInputButton= true;
+    };
+    $scope.submitNewPotentialRisk = function() {
+        function determinePercentPotentialHighRisk (potentialInput){
+            if (potentialInput=='undefined' || potentialInput == null){
+                $scope.placeNewPotentialHighRisk = 30;
+            } else{
+                $scope.placeNewPotentialHighRisk = potentialInput;
+            }
+            return potentialInput;
+        }
+        var potentialInput1 = $scope.updatePotentialHighRisk;
+        determinePercentPotentialHighRisk(potentialInput1);
+        console.log($scope.placeNewPotentialHighRisk);
+        $scope.showHighRiskInputButton= false;
+
     };
 
-    //This is to change the potential percentage of high Risk patients in the hospital
-    $scope.hidePercentage = false;
-    $scope.showHighRiskInput = false;
-    $scope.submitNewPotentialRisk = function(){
-        $scope.placeNewPotentialHighRisk = $scope.updatePotentialHighRisk;
-        $scope.updatePotentialHighRisk = "";
-        //console.log(!$scope.hidePercentage);
-        $scope.hidePercentage = !$scope.hidePercentage;
-        $scope.showHighRiskInput = !$scope.showHighRiskInput;
+
+    //$scope.placeNewAvgInfectionRate = 3.6;
+    //console.log("first it equal this: " + $scope.placeNewAvgInfectionRate);
+    $scope.changeAvgInfectionRate = function(){
+        $scope.showInfectionInputButton = true;
+    };
+    $scope.submitNewAvgInfectionRate = function() {
+        function determinePercentInfection (infectionInput){
+            if (infectionInput == 'undefined' || infectionInput == null ) {
+                $scope.placeNewAvgInfectionRate = 3.6;
+                console.log('life isn\'t fair')
+            } else {
+                $scope.placeNewAvgInfectionRate = infectionInput;
+            }
+            console.log("this is the one " + $scope.placeNewAvgInfectionRate);
+            return infectionInput;
+        }
+
+        var infectionInput1 = $scope.updateAvgInfectionRate;
+        determinePercentInfection(infectionInput1);
+
+
+        $scope.showInfectionInputButton = false;
 
     };
+
+
+
+
 //*********************************     ***************************************
 
 
@@ -327,21 +357,20 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
 
     //This is to change the actual Average Infection Rate according to studies
-    $scope.hideInfectionRate = false;
-    $scope.showInfectionInput = false;
-    $scope.placeNewAvgInfectionRate = 3.6;  //Set initial actual Average Infection rate
-    $scope.changeAvgInfectionRate = function() {
-        $scope.hideInfectionRate = !$scope.hideInfectionRate;
-        $scope.showInfectionInput = !$scope.showInfectionInput;
-    };
+    //$scope.hideInfectionRate = false;
+    //$scope.showInfectionInput = false;
+    //$scope.placeNewAvgInfectionRate = 3.6;  //Set initial actual Average Infection rate
+    //$scope.changeAvgInfectionRate = function() {
+    //    $scope.hideInfectionRate = !$scope.hideInfectionRate;
+    //    $scope.showInfectionInput = !$scope.showInfectionInput;
+    //};
 
-    $scope.submitNewAvgInfectionRate = function(){
-        $scope.placeNewAvgInfectionRate = $scope.updateAvgInfectionRate;
-        console.log("this is the new infection Rate " + $scope.updateAvgInfectionRate);
-        $scope.updateAvgInfectionRate = "";
-        $scope.hideInfectionRate = !$scope.hideInfectionRate;
-        $scope.showInfectionInput = !$scope.showInfectionInput;
-    };
+    //$scope.submitNewAvgInfectionRate = function(){
+    //    $scope.placeNewAvgInfectionRate = $scope.updateAvgInfectionRate;
+    //    $scope.updateAvgInfectionRate = "";
+    //    $scope.hideInfectionRate = !$scope.hideInfectionRate;
+    //    $scope.showInfectionInput = !$scope.showInfectionInput;
+    //};
 // *********************************           *******************************************
 
 
