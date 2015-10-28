@@ -22,7 +22,7 @@
        <header class="header">
            <div class="behindTitleDiv">
                <h1 class="overallTitle">Medtronic</h1>
-               <h4 class="currencySelector"><a href="">$</a><a href="">£</a><a href="">€</a></h4>
+               <h4 class="currencySelector"><!--<a href="">$</a><a href="">£</a> --><a href="">€</a></h4>
            </div>
        </header>
         <div class="container">
@@ -171,7 +171,7 @@
 
                             <div class="costDiff">
                                 <h3>Difference in Prices</h3>
-                                <h5>Potential Economic Impact to hospital <b>{{economicImpact}}</b></h5>
+                                <h5>Potential Economic Impact to hospital <b>€{{economicImpact}}</b></h5>
                                 <h5>Potential Risk of Patient Mortality (w/out TYRX): <b>{{PatientMortality}}</b></h5>
                                     <p class="mortalityRisk"><i>50% Risk at 3yrs/infection</i></p>
                             </div>
@@ -197,16 +197,16 @@
                                 </div>
 
 
-                                <div class="costPerPatient">
-                                    <ul class="costPerPatientList">
-                                        <li class="headingListItem"><b>Cost Per Patient</b></li>
-                                        <li>€{{patientBedCost}}</li>
-                                        <li>€{{deviceExtractionCost}}</li>
-                                        <li>€{{deviceReplacementCost}}</li>
-                                        <li>€{{antibioticsCost}}</li>
-                                        <li class="lineAbove">€{{totalCostsExample}}</li>
-                                    </ul>
-                                </div>
+                                <!--<div class="costPerPatient">-->
+                                    <!--<ul class="costPerPatientList">-->
+                                        <!--<li class="headingListItem"><b>Cost Per Patient</b></li>-->
+                                        <!--<li>€{{patientBedCost}}</li>-->
+                                        <!--<li>€{{deviceExtractionCost}}</li>-->
+                                        <!--<li>€{{deviceReplacementCost}}</li>-->
+                                        <!--<li>€{{antibioticsCost}}</li>-->
+                                        <!--<li class="lineAbove">€{{totalCostsExample}}</li>-->
+                                    <!--</ul>-->
+                                <!--</div>-->
 
 
                                 <div class="potentialCostDist">
