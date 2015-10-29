@@ -18,6 +18,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
     //The submitData is what happens when the submit Button is pressed
     $scope.submitData = function() {
+        console.log('heyhey');
             $scope.hideAndShowBox = true;
             $scope.showFirstTotals = true;
             $scope.showTotalPotentials = true;
@@ -143,8 +144,6 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
             $scope.TotalPotentialHighRisk = Math.round($scope.totalNumImplants * potentialHighRiskToPercentage);
 
             noTyrxCost = Math.round($scope.TotalAverageInfectionRate * costOfInfectionEuros);
-            console.log("$scope.totalAvgInfection " + $scope.TotalAverageInfectionRate);
-            console.log("cost of infection " + costOfInfectionEuros);
             $scope.TotalCostInfectionWithoutTyrx = numberWithCommas(noTyrxCost);
 
             var infectionwithTyrexCost = Math.round(CIEDInfectionRisk * $scope.TotalPotentialHighRisk * costOfInfectionEuros);
@@ -154,7 +153,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
             var TYRXCostInHighRiskPatients = TYRXPrice * $scope.TotalPotentialHighRisk;
             $scope.costOfTYRXInHighRiskPatients = numberWithCommas(TYRXCostInHighRiskPatients);
-            console.log("tyrx cost in high risk patients " + TYRXCostInHighRiskPatients);
+
 
 
             var totalCostTyrxAndInfection = infectionwithTyrexCost + TYRXCostInHighRiskPatients;
@@ -220,7 +219,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
             } else{
                 TYRXPrice = $scope.tyrxPrice;
             }
-            console.log(TYRXPrice);
+
             return TYRXPrice;
         }
 
@@ -232,7 +231,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
 
 
-
+console.log('why??????')
 
     }; //End submit Data function
 
@@ -337,7 +336,6 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
         }
         var potentialInput1 = $scope.updatePotentialHighRisk;
         determinePercentPotentialHighRisk(potentialInput1);
-        console.log($scope.placeNewPotentialHighRisk);
         $scope.showHighRiskInputButton= false;
 
     };

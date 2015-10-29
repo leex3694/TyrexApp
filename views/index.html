@@ -101,7 +101,8 @@
                                         </div>
 
                                         <div class="submitButton">
-                                            <input type="submit" ng-click="submitData()">
+                                            <button ng-click="submitData()">Submit</button>
+                                            <!--<input type="submit" ng-click="submitData()">-->
                                         </div>
                                     </div>
 
@@ -182,7 +183,7 @@
 
                             <div class="costDiff">
                                 <h3>Difference in Prices</h3>
-                                <h5>Potential Economic Impact to hospital <b>€{{economicImpact}}</b></h5>
+                                <h5>Potential Economic Impact to hospital <b>€<span ng-class="{true: 'negativeMoney', false: 'positiveMoney'}" class="makeLossRed">{{economicImpact}}</span></b></h5>
                                 <h5>Potential Risk of Patient Mortality (w/out TYRX): <b>{{PatientMortality}}</b></h5>
                                 <p class="mortalityRisk"><i>50% Risk at 3yrs/infection</i></p>
                             </div>
@@ -225,11 +226,7 @@
                                         <li class="lineAbove">€{{totalPotentialCostDist}}</li>
                                     </ul>
                                 </div>
-
-
                             </div>
-
-
                          </div>
                     </div>
                 </div>
@@ -248,10 +245,11 @@
                                 <p>*Costs of infection are based on a UK analysis of 30 infections and did NOT capture all costs (eg imaging, out-patient costs)</p>
                                 <p> *Cost of infection includes device replacement costs, which are a customized input in this model (NOT from Ahsan 2014 study)</p>
                                 <p>*Must display currency rates and dates, based on October 21, 2015</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
+            </div>
 
 
 

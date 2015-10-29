@@ -300,6 +300,9 @@ input.regularInputsNotPercents[type="number"] {
 
 }
 
+.makeLossRed{
+  color:red;
+}
 
 .perCostList, .costPerPatientList, .potentialCostDistList {
   padding-left: 8px;
