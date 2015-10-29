@@ -12,12 +12,12 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
     $scope.inputBoxHide = true;
     $scope.hidePercentageValues=true;
     var noTyrxCost;
-    $scope.placeNewPotentialHighRisk = 30;
+    $scope.placeNewPotentialHighRisk = 40;
     $scope.placeNewAvgInfectionRate = 3.6;
+
 
     //The submitData is what happens when the submit Button is pressed
     $scope.submitData = function() {
-
             $scope.hideAndShowBox = true;
             $scope.showFirstTotals = true;
             $scope.showTotalPotentials = true;
@@ -28,186 +28,206 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
             $scope.inputBoxHide = true;
         };
 
-            var inputPMQuantity = $scope.PMNumImplantsInput;
-            $scope.PMNumImplants = pmQuantity(inputPMQuantity);
+        var inputPMQuantity = $scope.PMNumImplantsInput;
+        $scope.PMNumImplants = pmQuantity(inputPMQuantity);
 
-            var inputCRTPQuantity = $scope.CRTPNumImplantsInput;
-            $scope.CRTPNumImplants = CRTPQuantity(inputCRTPQuantity);
+        var inputCRTPQuantity = $scope.CRTPNumImplantsInput;
+        $scope.CRTPNumImplants = CRTPQuantity(inputCRTPQuantity);
 
-            var inputICDQuantity = $scope.ICDNumImplantsInput;
-            $scope.ICDNumImplants = ICDQuantity(inputICDQuantity);
+        var inputICDQuantity = $scope.ICDNumImplantsInput;
+        $scope.ICDNumImplants = ICDQuantity(inputICDQuantity);
 
-            var inputCRTDQuantity = $scope.CRTDNumImplantsInput;
-            $scope.CRTDNumImplants = CRTDQuantity(inputCRTDQuantity);
-
-
+        var inputCRTDQuantity = $scope.CRTDNumImplantsInput;
+        $scope.CRTDNumImplants = CRTDQuantity(inputCRTDQuantity);
 
 
-            /* Getting the Device cost row to equal whatever is input or default to the default price from the database.
-             *  To change the default values, you must uncomment it in this file and send a new POST to update the values
-             and delete the old ones. They are stored in a mongo database.          */
-            var inputPMCostReceived = $scope.PMCostInput;
-            $scope.PMCost = theCostPM(inputPMCostReceived);
-
-            var inputCRTPCost = $scope.CRTPCostInput;
-            $scope.CRTPCost =theCostCRTP(inputCRTPCost);
-
-            var inputICDCost = $scope.ICDCostInput;
-            $scope.ICDCost = theCostICD(inputICDCost);
-
-            var inputCRTDCost = $scope.CRTDCostInput;
-            $scope.CRTDCost = theCostCRTD(inputCRTDCost);
-
-            // Cost object to send the value costs which are either input into box or default value
-            var CostObj = {
-                PMCost : $scope.PMCost,
-                CRTPCost : $scope.CRTPCost,
-                ICDCost : $scope.ICDCost,
-                CRTDCost :$scope.CRTDCost
-            };
-
-            postTotalPrices(CostObj);
 
 
-            /* Device Quantities object to send the number to the server to do the math
-             The $scope.PMNumImplants has been run through the PMQuantity function to see what value
-             should be passed in.        */
-            var deviceQuantities = {
-                PMQuantity: $scope.PMNumImplants,
-                CRTPQuantity: $scope.CRTPNumImplants,
-                ICDQuantity: $scope.ICDNumImplants,
-                CRTDQuantity: $scope.CRTDNumImplants
-            };
+        /* Getting the Device cost row to equal whatever is input or default to the default price from the database.
+         *  To change the default values, you must uncomment it in this file and send a new POST to update the values
+         and delete the old ones. They are stored in a mongo database.          */
+        var inputPMCostReceived = $scope.PMCostInput;
+        $scope.PMCost = theCostPM(inputPMCostReceived);
+
+        var inputCRTPCost = $scope.CRTPCostInput;
+        $scope.CRTPCost =theCostCRTP(inputCRTPCost);
+
+        var inputICDCost = $scope.ICDCostInput;
+        $scope.ICDCost = theCostICD(inputICDCost);
+
+        var inputCRTDCost = $scope.CRTDCostInput;
+        $scope.CRTDCost = theCostCRTD(inputCRTDCost);
+
+        // Cost object to send the value costs which are either input into box or default value
+        var CostObj = {
+            PMCost : $scope.PMCost,
+            CRTPCost : $scope.CRTPCost,
+            ICDCost : $scope.ICDCost,
+            CRTDCost :$scope.CRTDCost
+        };
+
+        postTotalPrices(CostObj);
 
 
-            /*********** GET the total cost Avg. by making the get call and math in the serve */
-            var x = getResult();
-            x.then(function(data){
-                costData = data.data;
-                $scope.totalDevicesCost = costData;
+        /* Device Quantities object to send the number to the server to do the math
+         The $scope.PMNumImplants has been run through the PMQuantity function to see what value
+         should be passed in.        */
+        var deviceQuantities = {
+            PMQuantity: $scope.PMNumImplants,
+            CRTPQuantity: $scope.CRTPNumImplants,
+            ICDQuantity: $scope.ICDNumImplants,
+            CRTDQuantity: $scope.CRTDNumImplants
+        };
+
+
+        /*********** GET the total cost Avg. by making the get call and math in the serve */
+        var x = getResult();
+        x.then(function(data){
+            costData = data.data;
+            $scope.totalDevicesCost = costData;
+        },function(err){
+            console.log(err);
+        });
+        /*********************************************/
+
+
+
+        getDeviceQuantities();  //Receiving the device quantities back
+
+
+        postDeviceQuantities(deviceQuantities);  //Calling the Post Quantities and passing in the Obj for quantities
+
+
+        /***************** Function to GET call the Total device quantities ******/
+                            //function getDeviceQuantities(){
+                            //    return $http({
+                            //        method:'GET',
+                            //        url: "/formRouter/getDeviceQuantities"
+                            //    }).then(function(data) {
+                            //        $scope.totalNumImplants = data.data;
+                            //        console.log("total num implants " + $scope.totalNumImplants);
+                            //        $scope.TotalPotentialHighRisk = Math.round($scope.totalNumImplants * potentialHighRiskToPercentage);
+                            //        highRisk ={TotalHighRiskPercentage: $scope.TotalPotentialHighRisk}
+                            //    },function(err){
+                            //        console.log(err);
+                            //        })
+                            //}
+
+        function getDeviceQuantities(){
+            return $http({
+                method:'GET',
+                url: "/formRouter/getDeviceQuantities"
+            });
+        }
+
+
+
+        function setTotalPotentialRisk(){
+            getDeviceQuantities().then(function(data) {
+                settingTotalCosts (data);
+                //returnPotentialCostDist(data);
+                returnPotentialCostDist();
+
             },function(err){
                 console.log(err);
-            });
-            /*********************************************/
+            })
+        }
+        /**************************************************************************/
+
+
+        setTotalPotentialRisk();
+
+        function settingTotalCosts (data){
+            $scope.totalNumImplants = data.data;
+
+            $scope.TotalPotentialHighRisk = Math.round($scope.totalNumImplants * potentialHighRiskToPercentage);
+
+            noTyrxCost = Math.round($scope.TotalAverageInfectionRate * costOfInfectionEuros);
+            console.log("$scope.totalAvgInfection " + $scope.TotalAverageInfectionRate);
+            console.log("cost of infection " + costOfInfectionEuros);
+            $scope.TotalCostInfectionWithoutTyrx = numberWithCommas(noTyrxCost);
+
+            var infectionwithTyrexCost = Math.round(CIEDInfectionRisk * $scope.TotalPotentialHighRisk * costOfInfectionEuros);
+            $scope.costInfectionWithTyrx = numberWithCommas(infectionwithTyrexCost);
 
 
 
-            getDeviceQuantities();  //Receiving the device quantities back
+            var TYRXCostInHighRiskPatients = TYRXPrice * $scope.TotalPotentialHighRisk;
+            $scope.costOfTYRXInHighRiskPatients = numberWithCommas(TYRXCostInHighRiskPatients);
+            console.log("tyrx cost in high risk patients " + TYRXCostInHighRiskPatients);
 
 
-            postDeviceQuantities(deviceQuantities);  //Calling the Post Quantities and passing in the Obj for quantities
+            var totalCostTyrxAndInfection = infectionwithTyrexCost + TYRXCostInHighRiskPatients;
+            $scope.totalCostInfectionAndTyrex = numberWithCommas(totalCostTyrxAndInfection);
 
 
-            /***************** Function to GET call the Total device quantities ******/
-                                //function getDeviceQuantities(){
-                                //    return $http({
-                                //        method:'GET',
-                                //        url: "/formRouter/getDeviceQuantities"
-                                //    }).then(function(data) {
-                                //        $scope.totalNumImplants = data.data;
-                                //        console.log("total num implants " + $scope.totalNumImplants);
-                                //        $scope.TotalPotentialHighRisk = Math.round($scope.totalNumImplants * potentialHighRiskToPercentage);
-                                //        highRisk ={TotalHighRiskPercentage: $scope.TotalPotentialHighRisk}
-                                //    },function(err){
-                                //        console.log(err);
-                                //        })
-                                //}
 
-            function getDeviceQuantities(){
-                return $http({
-                    method:'GET',
-                    url: "/formRouter/getDeviceQuantities"
-                });
+            var economicDifference = totalCostTyrxAndInfection - noTyrxCost;
+            $scope.economicImpact = numberWithCommas(economicDifference);
+
+            returnPotentialCostDist(data);
+        }
+
+
+
+
+
+        //Math and appending for Total potential # of High Risk Patients
+        var potentialHighRiskToPercentage;
+        function resultTotalPotentialHighRiskPatients (){
+            potentialHighRiskToPercentage = $scope.placeNewPotentialHighRisk/100;
+            $scope.PMPotentialHighRisk  = Math.round((deviceQuantities.PMQuantity) * potentialHighRiskToPercentage);
+            $scope.CRTPPotentialHighRisk = Math.round((deviceQuantities.CRTPQuantity) * potentialHighRiskToPercentage);
+            $scope.ICDPotentialHighRisk =  Math.round((deviceQuantities.ICDQuantity) * potentialHighRiskToPercentage);
+            $scope.CRTDPotentialHighRisk = Math.round((deviceQuantities.CRTDQuantity) * potentialHighRiskToPercentage);
+        }
+        /****************************************************/
+
+
+        function actualRiskMaker(){
+            var averageInfectionRate = $scope.placeNewAvgInfectionRate/100;
+            $scope.PMDeviceInfection = $scope.PMPotentialHighRisk * averageInfectionRate;
+            $scope.CRTPDeviceInfection = $scope.CRTPPotentialHighRisk * averageInfectionRate;
+            $scope.ICDDeviceInfection =  $scope.ICDPotentialHighRisk * averageInfectionRate;
+            $scope.CRTDDeviceInfection = $scope.CRTDPotentialHighRisk * averageInfectionRate;
+            $scope.TotalAverageInfectionRate =  ($scope.PMDeviceInfection + $scope.CRTPDeviceInfection + $scope.ICDDeviceInfection + $scope.CRTDDeviceInfection).toFixed(2);
+            $scope.PatientMortality =  Math.ceil($scope.TotalAverageInfectionRate / 2);
+        }
+
+
+
+        resultTotalPotentialHighRiskPatients();
+        actualRiskMaker();
+
+
+
+        //var costOfInfectionDollars =  47817.57;
+        var costOfInfectionEuros =  42076.27;
+        //var costOfInfectionPounds = 30,958.40;
+
+        var CIEDInfectionRisk = .0044;
+        //var TYRXPrice = 1292;
+
+
+
+
+// TYRX Price function that either gives it a default price or whatever is typed into the input box
+        var TYRXPrice;
+        function TyrxCost (tyrxPrice){
+
+            if (tyrxPrice ==='undefined' || tyrxPrice == null){
+                TYRXPrice = 1292;
+            } else{
+                TYRXPrice = $scope.tyrxPrice;
             }
+            console.log(TYRXPrice);
+            return TYRXPrice;
+        }
 
-
-
-            function setTotalPotentialRisk(){
-                getDeviceQuantities().then(function(data) {
-                    settingTotalCosts (data);
-                    //returnPotentialCostDist(data);
-                    returnPotentialCostDist();
-
-                },function(err){
-                    console.log(err);
-                })
-            }
-            /**************************************************************************/
-
-
-            setTotalPotentialRisk();
-
-            function settingTotalCosts (data){
-                $scope.totalNumImplants = data.data;
-
-                $scope.TotalPotentialHighRisk = Math.round($scope.totalNumImplants * potentialHighRiskToPercentage);
-
-                noTyrxCost = Math.round($scope.TotalAverageInfectionRate * costOfInfectionEuros);
-                $scope.TotalCostInfectionWithoutTyrx = numberWithCommas(noTyrxCost);
-
-                var infectionwithTyrexCost = Math.round(CIEDInfectionRisk * $scope.TotalPotentialHighRisk * costOfInfectionEuros);
-                $scope.costInfectionWithTyrx = numberWithCommas(infectionwithTyrexCost);
-
-
-
-                var TYRXCostInHighRiskPatients = TYRXPrice * $scope.TotalPotentialHighRisk;
-                $scope.costOfTYRXInHighRiskPatients = numberWithCommas(TYRXCostInHighRiskPatients);
-
-                var totalCostTyrxAndInfection = infectionwithTyrexCost + TYRXCostInHighRiskPatients;
-                $scope.totalCostInfectionAndTyrex = numberWithCommas(totalCostTyrxAndInfection);
-
-
-
-                var economicDifference = totalCostTyrxAndInfection - noTyrxCost;
-                $scope.economicImpact = numberWithCommas(economicDifference);
-
-                returnPotentialCostDist(data);
-            }
-
-
-
-
-
-            //Math and appending for Total potential # of High Risk Patients
-            var potentialHighRiskToPercentage;
-            function resultTotalPotentialHighRiskPatients (){
-                potentialHighRiskToPercentage = $scope.placeNewPotentialHighRisk/100;
-                $scope.PMPotentialHighRisk  = Math.round((deviceQuantities.PMQuantity) * potentialHighRiskToPercentage);
-                $scope.CRTPPotentialHighRisk = Math.round((deviceQuantities.CRTPQuantity) * potentialHighRiskToPercentage);
-                $scope.ICDPotentialHighRisk =  Math.round((deviceQuantities.ICDQuantity) * potentialHighRiskToPercentage);
-                $scope.CRTDPotentialHighRisk = Math.round((deviceQuantities.CRTDQuantity) * potentialHighRiskToPercentage);
-            }
-            /****************************************************/
-
-
-            function actualRiskMaker(){
-                var averageInfectionRate = $scope.placeNewAvgInfectionRate/100;
-                $scope.PMDeviceInfection = Math.round($scope.PMPotentialHighRisk * averageInfectionRate);
-                $scope.CRTPDeviceInfection = Math.round($scope.CRTPPotentialHighRisk * averageInfectionRate);
-                $scope.ICDDeviceInfection =  Math.round($scope.ICDPotentialHighRisk * averageInfectionRate);
-                $scope.CRTDDeviceInfection = Math.round($scope.CRTDPotentialHighRisk * averageInfectionRate);
-                $scope.TotalAverageInfectionRate =  $scope.PMDeviceInfection +$scope.CRTPDeviceInfection + $scope.ICDDeviceInfection + $scope.CRTDDeviceInfection;
-                $scope.PatientMortality =  Math.ceil($scope.TotalAverageInfectionRate / 2);
-            }
-
-
-
-            resultTotalPotentialHighRiskPatients();
-            actualRiskMaker();
-
-
-
-
-            //var costOfInfectionDollars =  47817.57;
-            var costOfInfectionEuros =  42076.27;
-            //var costOfInfectionPounds = 30,958.40;
-
-            var CIEDInfectionRisk = .0044;
-            var TYRXPrice = 1292;
-
-
-
-
+        var typedInValueForTyrxPrice = $scope.tyrxPrice;
+        var ttt = TyrxCost(typedInValueForTyrxPrice);
+        TyrxCost(typedInValueForTyrxPrice);
+/*********************************************************************/
 
 
 
@@ -215,6 +235,9 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
 
     }; //End submit Data function
+
+
+
 
 
     function postDeviceQuantities (deviceQuantities){
@@ -245,7 +268,6 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return parts.join(".");
     }
-
 
 
 
@@ -307,7 +329,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
     $scope.submitNewPotentialRisk = function() {
         function determinePercentPotentialHighRisk (potentialInput){
             if (potentialInput=='undefined' || potentialInput == null){
-                $scope.placeNewPotentialHighRisk = 30;
+                $scope.placeNewPotentialHighRisk = 40;
             } else{
                 $scope.placeNewPotentialHighRisk = potentialInput;
             }
@@ -330,11 +352,9 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
         function determinePercentInfection (infectionInput){
             if (infectionInput == 'undefined' || infectionInput == null ) {
                 $scope.placeNewAvgInfectionRate = 3.6;
-                console.log('life isn\'t fair')
             } else {
                 $scope.placeNewAvgInfectionRate = infectionInput;
             }
-            console.log("this is the one " + $scope.placeNewAvgInfectionRate);
             return infectionInput;
         }
 
@@ -495,7 +515,8 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
      */
 
 
-
+//button only functions once
+//update the price without it having to be submitted
 
 
 
@@ -505,11 +526,6 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
 
 
-
-//function get...get the data back
-// Can't get the potential High Risk percentage input to disappear after submitting
-// I have to do 3 currencies, what's the easiest way to do that?
-// can i make 1 function to take in all types of COSts
 
 
 

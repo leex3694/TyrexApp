@@ -297,6 +297,7 @@ input.regularInputsNotPercents[type="number"] {
 
 .InfectionCostDistribution, .totalCostWithTyrx, .costDiff{
   padding-top: 5px;
+
 }
 
 
@@ -309,16 +310,6 @@ input.regularInputsNotPercents[type="number"] {
   padding: 2px;
 }
 
-
-
-
-/*@media screen and (max-width: 480px) {*/
-
-  /*.tableAndSubmitButton{*/
-    /*margin: 0 auto;*/
-    /*width: 100%;*/
-  /*}*/
-/*}*/
 
 @media screen and (min-width: 300px) and (max-width: 630px) {
 
@@ -344,13 +335,6 @@ input.regularInputsNotPercents[type="number"] {
 
 
 @media screen and (max-width: 980px) {
-  /*.header {*/
-    /*height: 146px;*/
-  /*}*/
-
-  /*.behindTitleDiv {*/
-    /*height: 126px;*/
-  /*}*/
 
 }
 

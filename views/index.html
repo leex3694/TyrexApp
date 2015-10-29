@@ -39,6 +39,7 @@
 
 
                                 <form>
+                                    <h5>Tyrx Cost: <input type="number" ng-model="tyrxPrice" class="regularInputsNotPercents" placeholder="€1292"> </h5>
                                     <h3 class="tableTitle">Enter your hospital's data</h3>
                                     <div class="tableAndSubmitButton">
 
@@ -81,7 +82,7 @@
                                             <div class="changePercentages">
                                                 <span  ng-model="potentialHighRisk">
                                                     <span class="percentagesHover" ng-hide="hidePercentage"  ng-click="changePotentialHighRisk()">Change % of potential high risk:
-                                                    <input class="percentageChangeInput" ng-model="updatePotentialHighRisk" placeholder="30" type="number"> <span ng-hide="hidePercentageValues"> {{placeNewPotentialHighRisk}}</span>%</span>
+                                                    <input class="percentageChangeInput" ng-model="updatePotentialHighRisk" placeholder="40" type="number"> <span ng-hide="hidePercentageValues"> {{placeNewPotentialHighRisk}}</span>%</span>
                                                    <lable ng-show="showHighRiskInput">Change % of potential high risk </lable>
                                                     <input type="number" class="percentageChangeInput" ng-model="updatePotentialHighRisk" ng-show="showHighRiskInput">
                                                     <input type="submit" class="submitPercentages" ng-show="showHighRiskInputButton"  ng-click="submitNewPotentialRisk()">
@@ -169,12 +170,7 @@
                                 <p> <b>€{{TotalCostInfectionWithoutTyrx}}</b></p>
                             </div>
 
-                            <div class="costDiff">
-                                <h3>Difference in Prices</h3>
-                                <h5>Potential Economic Impact to hospital <b>€{{economicImpact}}</b></h5>
-                                <h5>Potential Risk of Patient Mortality (w/out TYRX): <b>{{PatientMortality}}</b></h5>
-                                    <p class="mortalityRisk"><i>50% Risk at 3yrs/infection</i></p>
-                            </div>
+
 
                             <div class="totalCostWithTyrx">
                                 <h3>Potential Cost With TYRX</h3>
@@ -182,6 +178,15 @@
                                 <h5>Potential cost of TYRX in high risk patients: <b>€{{costOfTYRXInHighRiskPatients}}</b></h5>
                                 <h5>Potential cost of infections and Tyrx in high risk patients	<b>€{{totalCostInfectionAndTyrex}}</b></h5>
                             </div>
+
+
+                            <div class="costDiff">
+                                <h3>Difference in Prices</h3>
+                                <h5>Potential Economic Impact to hospital <b>€{{economicImpact}}</b></h5>
+                                <h5>Potential Risk of Patient Mortality (w/out TYRX): <b>{{PatientMortality}}</b></h5>
+                                <p class="mortalityRisk"><i>50% Risk at 3yrs/infection</i></p>
+                            </div>
+
 
                             <div class="InfectionCostDistribution">
                                 <h3>Infection Cost Distribution Example</h3>
