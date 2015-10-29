@@ -327,15 +327,23 @@ input.regularInputsNotPercents[type="number"] {
     position: relative;
     left: -37px;
   }
-
+  /*.tableAndSubmitButton{*/
+    /*margin: 0 auto;*/
+    /*width: 100%;*/
+  /*}*/
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (min-width: 400px) and (max-width: 760px) {
 
   .tableAndSubmitButton{
     margin: 0 auto;
     width: 100%;
   }
+
+  /*.percentagesHover {*/
+    /*position: relative;*/
+    /*left: -37px;*/
+  /*}*/
 }
 
 @media screen and (max-width: 980px) {

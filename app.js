@@ -7,7 +7,11 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var mongoURI = 'mongodb://localhost:27017/tyrexapp';
+//var mongoURI = 'mongodb://medtronic:medtyrx@ds045604.mongolab.com:45604/tyrx';
 var mongoDB = mongoose.connect(mongoURI).connection;
+//mongorestore -h ds045604.mongolab.com:45604 -d tyrx -u medtronic -p medtyrx
+
+//https://thawing-reef-6540.herokuapp.com/
 
 mongoDB.on('error', function(err){
   console.log('oh snap, MongoDB got an eror ', err);
