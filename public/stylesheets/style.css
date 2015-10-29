@@ -311,33 +311,26 @@ input.regularInputsNotPercents[type="number"] {
 }
 
 
-@media screen and (max-width: 410px) {
-  .percentagesHover {
-    position: relative;
-    left: -25px;
-  }
-
-  .changePercentages {
-    margin-bottom: 15px;
-}
 
 
-@media screen and (max-width: 480px) {
-  .percentagesHover {
-    position: relative;
-    left: -37px;
-  }
+/*@media screen and (max-width: 480px) {*/
+
   /*.tableAndSubmitButton{*/
     /*margin: 0 auto;*/
     /*width: 100%;*/
   /*}*/
-}
+/*}*/
 
-@media screen and (min-width: 400px) and (max-width: 760px) {
+@media screen and (min-width: 400px) and (max-width: 630px) {
 
   .tableAndSubmitButton{
     margin: 0 auto;
     width: 100%;
+  }
+
+  .percentagesHover {
+    position: relative;
+    left: -37px;
   }
 
   /*.percentagesHover {*/
