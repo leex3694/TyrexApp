@@ -205,7 +205,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
         //var costOfInfectionPounds = 30,958.40;
 
         var CIEDInfectionRisk = .0044;
-        //var TYRXPrice = 1292;
+        //var TYRXPrice = 1000;
 
 
 
@@ -215,7 +215,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
         function TyrxCost (tyrxPrice){
 
             if (tyrxPrice ==='undefined' || tyrxPrice == null){
-                TYRXPrice = 1292;
+                TYRXPrice = 1000;
             } else{
                 TYRXPrice = $scope.tyrxPrice;
             }

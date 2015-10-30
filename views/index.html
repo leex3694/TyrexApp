@@ -39,7 +39,7 @@
 
 
                                 <form>
-                                    <h5>Tyrx Cost: <input type="number" ng-model="tyrxPrice" class="regularInputsNotPercents" placeholder="€1292"> </h5>
+                                    <h5>Tyrx Cost: <input type="number" ng-model="tyrxPrice" class="regularInputsNotPercents" placeholder="€1000"> </h5>
                                     <h3 class="tableTitle">Enter your hospital's data</h3>
                                     <div class="tableAndSubmitButton">
 
@@ -218,12 +218,11 @@
                                 <div class="potentialCostDist">
                                     <ul class="potentialCostDistList">
                                         <li class="headingListItem"><b>Potential Cost Dist.</b></li>
-                                        <li>€{{PotentialDistBed}}</li>
-                                        <li>€{{potentialDistDeviceExtraction}}</li>
-                                        <li>€{{potentialDistDeviceReplacement}}</li>
-                                        <li>€{{potentialCostDistAntibiotics}}</li>
-
-                                        <li class="lineAbove">€{{totalPotentialCostDist}}</li>
+                                        <li>€ <span class="potentialCostDistRed"> {{PotentialDistBed}} </span> </li>
+                                        <li>€ <span class="potentialCostDistRed"> {{potentialDistDeviceExtraction}} </span></li>
+                                        <li>€ <span class="potentialCostDistRed"> {{potentialDistDeviceReplacement}} </span> </li>
+                                        <li>€ <span class="potentialCostDistRed"> {{potentialCostDistAntibiotics}} </span> </li>
+                                        <li class="lineAbove">€ <span class="potentialCostDistRed">{{totalPotentialCostDist}} </span> </li>
                                     </ul>
                                 </div>
                             </div>

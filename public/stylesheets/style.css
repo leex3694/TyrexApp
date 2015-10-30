@@ -242,6 +242,10 @@ input.regularInputsNotPercents[type="number"] {
   padding-left: 8px;
 }
 
+.potentialCostDistRed{
+  color:red;
+}
+
 .headingListItem{
   border: 1px solid #000000;
   padding: 2px;
