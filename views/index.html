@@ -106,13 +106,15 @@
                                         </div>
                                     </div>
 
-
                                 </form>
 
-                                <ul ng-show="showFirstTotals" class="fade there" >
-                                    <!--ng-if="bool"-->
-                                    <li>Total # Implants: {{totalNumImplants}}</li>
-                                    <li>Total Average Device System Cost: €{{totalDevicesCost}}</li>
+
+
+                                <ul >
+                                    <div class="totalImplantsAndCost">
+                                        <li ng-show="showtotalImplantsAndCost"> <h5><b> Total # Implants: {{totalNumImplants}}</b> </h5> </li>
+                                        <li ng-show="showtotalImplantsAndCost"> <h5> <b>Total Average Device System Cost: €{{totalDevicesCost}}</b> </h5> </li>
+                                    </div>
                                 </ul>
 
 

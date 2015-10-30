@@ -11,6 +11,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
     $scope.showAvgRelatedInfection = false;
     $scope.inputBoxHide = true;
     $scope.hidePercentageValues=true;
+    $scope.showtotalImplantsAndCost = false;
     var noTyrxCost;
     $scope.placeNewPotentialHighRisk = 40;
     $scope.placeNewAvgInfectionRate = 3.6;
@@ -24,6 +25,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
             $scope.showTotalPotentials = true;
             $scope.showAvgRelatedInfection = true;
             $scope.inputBoxHide = false;
+            $scope.showtotalImplantsAndCost = true;
         $scope.editInputs = function(){
             $scope.hideAndShowBox = false;
             $scope.inputBoxHide = true;
@@ -86,6 +88,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
         x.then(function(data){
             costData = data.data;
             $scope.totalDevicesCost = costData;
+            console.log($scope.totalDevicesCost)
         },function(err){
             console.log(err);
         });
@@ -459,6 +462,7 @@ console.log('why??????')
             $scope.PMCost = returnedSetCostPM;
         }
         else ($scope.PMCost = $scope.PMCostInput);
+        console.log($scope.PMCostInput);
         return $scope.PMCost;
     }
 

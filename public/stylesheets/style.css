@@ -114,9 +114,6 @@ input[type=number]::-webkit-outer-spin-button {
   float:left;
 }
 
-table .center {
-}
-
 .submitButton{
   text-align: center;
   float: right;
@@ -142,9 +139,6 @@ li {
 
 }
 
-/*th, td {*/
-  /*margin-right: 3px;*/
-/*}*/
 
 .totalPotentials{
 
@@ -172,7 +166,6 @@ li {
 
 
 input.regularInputsNotPercents[type="number"] {
-  /*width: 72px;*/
   width: 15%;
 
 }
@@ -201,6 +194,12 @@ input.regularInputsNotPercents[type="number"] {
 
 .panel-body{
   border: none;
+}
+
+.totalImplantsAndCost{
+  margin-top: 44px;
+  margin-bottom: 9px;
+  font-weight: bold;
 }
 
 .totalInfectionCostWithoutTyrx{
