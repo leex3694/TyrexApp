@@ -21,7 +21,7 @@
 
        <header class="header">
            <div class="behindTitleDiv">
-               <h1 class="overallTitle">Medtronic</h1>
+               <h1 class="overallTitle">Healthcare Infection Costs</h1>
                <h4 class="currencySelector"><!--<a href="">$</a><a href="">£</a> --><a href="">€</a></h4>
            </div>
        </header>
@@ -132,10 +132,10 @@
                                     <!--ng-if="bool"-->
                                     <ul>
                                         <h3>Device Related Infections</h3>
-                                        <li>PM: {{PMDeviceInfection}}</li>
-                                        <li>CRTP: {{CRTPDeviceInfection}}</li>
-                                        <li>ICD: {{ICDDeviceInfection}}</li>
-                                        <li>CRTD: {{CRTDDeviceInfection}}</li>
+                                        <li>PM: {{(PMDeviceInfection).toFixed(2)}}</li>
+                                        <li>CRTP: {{(CRTPDeviceInfection).toFixed(2)}}</li>
+                                        <li>ICD: {{(ICDDeviceInfection).toFixed(2)}}</li>
+                                        <li>CRTD: {{(CRTDDeviceInfection).toFixed(2)}}</li>
                                         <li><b>Total: {{TotalAverageInfectionRate}}</b></li>
                                     </ul>
                                 </div>

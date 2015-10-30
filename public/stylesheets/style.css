@@ -1,31 +1,40 @@
+
+
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgba(2, 2, 29, 0.19);
+  position: relative;
+  top: -20px;
 }
 
 .header {
-  background-color: rgba(0, 80, 183, 0.77);
+  /*background-color: rgba(0, 80, 183, 0.77);*/
+  background-color: rgba(8, 21, 68, 0.87);
   width: 100%;
   z-index: 1;
-  height: 125px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  box-shadow:  5px 5px 11px #000e2b;
+  height: 139px;
+  /*border-radius: 10px;*/
+  margin-bottom: 13px;
+  /*box-shadow:  5px 5px 11px #000e2b;*/
 }
 
 a {
   color: #00B7FF;
 }
 
+.container{
+  padding: 5px 10px;
+}
+
 .behindTitleDiv{
-  width: 50%;
   margin-left: auto;
   margin-right: auto;
   background-color: rgba(14, 14, 14, 0.58);
   padding-bottom: 13px;
   position: relative;
-  top: 18px;
-  border-radius: 7px;
-  box-shadow: 3px 2px 5px;
+  top: 16px;
+  /* border-radius: 7px; */
+  box-shadow: inset 0px 11px 6px -11px #CCC, inset 0px -8px 11px -10px #CCC;
 }
 
 .overallTitle{
@@ -46,20 +55,12 @@ a {
 
 }
 
-
-
-
-
 .tableAndSubmitButton{
-}
-
-.inputDataTable{
-
-}
-
-.DataTable{
+  margin: 0 auto;
+  width: 75%;
 
 }
+
 .column1 {
   width: 15%;
   float: left;
@@ -82,13 +83,6 @@ a {
   width: 15%;
 }
 
-.inputBoxes1{
-}
-
-.inputBoxes2{
-}
-
-
 .rowSections{
   display: inline;
 
@@ -105,19 +99,8 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-/*th  {*/
-  /*text-align: center;*/
-/*}*/
-
-.titlesForColumns{
-  /*padding-left: 50px;*/
-}
-
 .tableRow{
   padding: 7px;
-}
-.columnTitles{
-
 }
 
 .columnTitle{
@@ -125,23 +108,10 @@ input[type=number]::-webkit-outer-spin-button {
   margin-left:3px;
 }
 
-
 .spanWidth{
   width:15%;
   display:block;
   float:left;
-
-}
-
-
-
-
-
-
-.tableAndSubmitButton{
-  margin: 0 auto;
-  width: 50%;
-
 }
 
 table .center {
@@ -150,8 +120,8 @@ table .center {
 .submitButton{
   text-align: center;
   float: right;
-  /*position: relative;*/
-  /*left: 150px;*/
+  position: relative;
+  right: 109px;
 }
 
 .changePercentages{
@@ -159,45 +129,9 @@ table .center {
   text-align: center;
 }
 
-/*.fade.ng-enter {*/
-  /*transition:1s linear all;*/
-  /*opacity:0;*/
-/*}*/
-
-/*/!* The finishing CSS styles for the enter animation *!/*/
-/*.fade.ng-enter.ng-enter-active {*/
-  /*opacity:1;*/
-/*}*/
-
-
 .percentageChangeInput{
 
 }
-
-/*.there{*/
-  /*opacity:1;*/
-  /*text-align: center;*/
-/*}*/
-
-/*.fade1.ng-enter {*/
-  /*transition:2.5s linear all;*/
-  /*opacity:0;*/
-/*}*/
-
-/*/!* The finishing CSS styles for the enter animation *!/*/
-/*.fade1.ng-enter.ng-enter-active {*/
-  /*opacity:1;*/
-/*}*/
-
-/*.fade2.ng-enter {*/
-  /*transition:4s linear all;*/
-  /*opacity:0;*/
-/*}*/
-
-/*/!* The finishing CSS styles for the enter animation *!/*/
-/*.fade2.ng-enter.ng-enter-active {*/
-  /*opacity:1;*/
-/*}*/
 
 li {
   list-style: none;
@@ -314,14 +248,23 @@ input.regularInputsNotPercents[type="number"] {
 }
 
 
+@media screen and (max-width: 459px) {
+  .header{
+    height: 164px;
+  }
+}
 @media screen and (min-width: 300px) and (max-width: 630px) {
 
-  .tableAndSubmitButton{
+  .tableAndSubmitButton {
     margin: 0 auto;
     width: 100%;
   }
 
-  .percentagesContainer{
+  .submitButton{
+    position: inherit;
+  }
+
+  .percentagesContainer {
     margin-bottom: 15px;
   }
 
@@ -331,13 +274,14 @@ input.regularInputsNotPercents[type="number"] {
     margin-bottom: 15px;
   }
 
-  .submitButton{
+
+}
+
+@media screen and (min-width: 631px) {
+  .submitButton {
     position: relative;
-    /*left: */
+    left: -50px
   }
-
-
-@media screen and (max-width: 980px) {
 
 }
 

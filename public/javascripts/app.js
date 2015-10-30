@@ -189,7 +189,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
             $scope.CRTPDeviceInfection = $scope.CRTPPotentialHighRisk * averageInfectionRate;
             $scope.ICDDeviceInfection =  $scope.ICDPotentialHighRisk * averageInfectionRate;
             $scope.CRTDDeviceInfection = $scope.CRTDPotentialHighRisk * averageInfectionRate;
-            $scope.TotalAverageInfectionRate =  ($scope.PMDeviceInfection + $scope.CRTPDeviceInfection + $scope.ICDDeviceInfection + $scope.CRTDDeviceInfection).toFixed(2);
+            $scope.TotalAverageInfectionRate =  Math.ceil($scope.PMDeviceInfection + $scope.CRTPDeviceInfection + $scope.ICDDeviceInfection + $scope.CRTDDeviceInfection);
             $scope.PatientMortality =  Math.ceil($scope.TotalAverageInfectionRate / 2);
         }
 
