@@ -32,7 +32,7 @@ a {
   background-color: rgba(14, 14, 14, 0.58);
   padding-bottom: 13px;
   position: relative;
-  top: 16px;
+  top: 22px;
   /* border-radius: 7px; */
   box-shadow: inset 0px 11px 6px -11px #CCC, inset 0px -8px 11px -10px #CCC;
 }
@@ -255,6 +255,10 @@ input.regularInputsNotPercents[type="number"] {
   .header{
     height: 164px;
   }
+
+  .behindTitleDiv{
+    top: 17px;
+  }
 }
 @media screen and (min-width: 300px) and (max-width: 630px) {
 
@@ -262,6 +266,7 @@ input.regularInputsNotPercents[type="number"] {
     margin: 0 auto;
     width: 100%;
   }
+
 
   .submitButton{
     position: inherit;
