@@ -42,6 +42,8 @@ a {
   position: relative;
   top: 21px;
   color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
 }
 
 .currencySelector{
