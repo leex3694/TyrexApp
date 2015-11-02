@@ -259,7 +259,7 @@ input.regularInputsNotPercents[type="number"] {
   }
 
   .behindTitleDiv{
-    top: 17px;
+    top: 12px;
   }
 }
 @media screen and (min-width: 300px) and (max-width: 630px) {
