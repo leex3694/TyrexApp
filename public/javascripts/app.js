@@ -19,7 +19,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
     //The submitData is what happens when the submit Button is pressed
     $scope.submitData = function() {
-        console.log('heyhey');
+        //console.log('heyhey');
             $scope.hideAndShowBox = true;
             $scope.showFirstTotals = true;
             $scope.showTotalPotentials = true;
@@ -83,12 +83,12 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
         };
 
 
-        /*********** GET the total cost Avg. by making the get call and math in the serve */
+        /*********** GET the total cost Avg. by making the get call and math in the server */
         var x = getResult();
         x.then(function(data){
             costData = data.data;
             $scope.totalDevicesCost = costData;
-            console.log($scope.totalDevicesCost)
+            //console.log($scope.totalDevicesCost)
         },function(err){
             console.log(err);
         });
@@ -101,7 +101,7 @@ app.controller('FormController', ['$scope', '$http', function($scope, $http){
 
         postDeviceQuantities(deviceQuantities);  //Calling the Post Quantities and passing in the Obj for quantities
 
-
+        /***************** TO DELETE **************************/
         /***************** Function to GET call the Total device quantities ******/
                             //function getDeviceQuantities(){
                             //    return $http({
